@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async"
+import { FaInstagram } from "react-icons/fa"
 import Container from "../components/layout/Container"
 import { artistsData } from "../data/artists"
 import { buildTitle } from "../utils/seo"
@@ -57,8 +58,14 @@ export default function Artists() {
                     ))}
                   </div>
 
-                  <a href={artist.instagram} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors uppercase tracking-wide">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  <a
+                    href={artist.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Instagram di ${artist.name}`}
+                    className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors uppercase tracking-wide"
+                  >
+                    <FaInstagram size={16} />
                     Instagram
                   </a>
                 </div>
