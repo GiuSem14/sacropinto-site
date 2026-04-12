@@ -13,6 +13,7 @@ import Faq from "./pages/Faq"
 import Contact from "./pages/Contact"
 import PrivacyPolicy from "./pages/PrivacyPolicy"
 import CookiePolicy from "./pages/CookiePolicy"
+import NotFound from "./pages/NotFound"
 
 function ScrollToTop() {
   useScrollToTop()
@@ -37,6 +38,7 @@ export default function App() {
                 <Route path="/contatti" element={<Contact />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/cookie-policy" element={<CookiePolicy />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />
