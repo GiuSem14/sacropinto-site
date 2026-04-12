@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom"
 import { FaInstagram, FaWhatsapp } from "react-icons/fa"
 import { SITE_NAME, CONTACT, NAV_LINKS } from "../../utils/constants"
+import { useCookieConsent } from "../../hooks/useCookieConsent"
 
 export default function Footer() {
   const year = new Date().getFullYear()
   const whatsappUrl = `https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`
+  const { openPreferences } = useCookieConsent()
 
   return (
     <footer className="bg-black border-t border-gray-800 text-gray-400 mt-auto">
@@ -79,9 +81,16 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-gray-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
           <p>© {year} {SITE_NAME}. Tutti i diritti riservati.</p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/cookie-policy" className="hover:text-white transition-colors">Cookie Policy</Link>
+            <button
+              type="button"
+              onClick={openPreferences}
+              className="hover:text-white transition-colors"
+            >
+              Gestisci cookie
+            </button>
           </div>
         </div>
       </div>
