@@ -259,10 +259,25 @@ For each file in `src/pages/*.jsx`, update the `<meta name="description">` insid
 
 ### 3.1 Favicon
 
-Replace `public/favicon.svg` (or equivalent) with the client's favicon. Ideal setup:
-- `favicon.svg` (vector, preferred)
-- `favicon-32x32.png` (fallback)
-- `apple-touch-icon.png` (180x180 for iOS)
+The template uses a simple SVG-only favicon at `public/favicon.svg` with a single letter on a black background (default: "S" for Sacropinto). SVG is supported by all modern browsers and scales perfectly at any size.
+
+**To adapt the favicon for a new client**:
+
+1. Open `public/favicon.svg` in any text editor (e.g., VS Code)
+2. Locate the `<text>` element — it contains a single letter
+3. Replace the letter with the client's initial (e.g., "D" for "Dragon Tattoo", "I" for "Ink Studio")
+4. Optionally, change `fill="#000000"` (background) or `fill="#ffffff"` (text color) to match the client's brand palette
+5. Save the file
+
+**To update the title and meta description** shown in browser tabs before React mounts:
+
+1. Open `index.html` at the project root
+2. Update the `<title>` tag with the client's studio name
+3. Update the `<meta name="description">` tag with a short client-specific description
+4. Update the `<meta name="theme-color">` to match the client's brand color (controls the mobile browser bar color)
+5. Also ensure `<html lang="it">` matches the actual site language
+
+**Note**: avoid PNG fallbacks unless targeting very old browsers — they require additional files and generation steps without real-world benefit. All browsers released after 2020 support SVG favicons natively.
 
 ### 3.2 Logo
 
