@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { faqData } from "../data/faq"
 import Container from "../components/layout/Container"
-import { buildTitle } from "../utils/seo"
+import { buildMeta } from "../utils/seo"
 
 function FAQItem({ question, answer }) {
   const [open, setOpen] = useState(false)
@@ -27,11 +27,34 @@ function FAQItem({ question, answer }) {
 }
 
 export default function Faq() {
+  const meta = buildMeta({
+    title: "FAQ",
+    description: "Domande frequenti su Sacropinto tattoo studio a Piazza Armerina. Come prenotare, quanto costa, come prepararsi e come curare il tatuaggio.",
+    path: "/faq",
+  })
+
   return (
     <>
       <Helmet>
-        <title>{buildTitle("FAQ")}</title>
-        <meta name="description" content="Domande frequenti su Sacropinto tattoo studio a Piazza Armerina. Come prenotare, quanto costa, come prepararsi e come curare il tatuaggio." />
+        {/* Base SEO */}
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
+        <link rel="canonical" href={meta.canonical} />
+
+        {/* Open Graph — Facebook, WhatsApp, LinkedIn */}
+        <meta property="og:type" content={meta.ogType} />
+        <meta property="og:site_name" content={meta.ogSiteName} />
+        <meta property="og:locale" content={meta.ogLocale} />
+        <meta property="og:title" content={meta.ogTitle} />
+        <meta property="og:description" content={meta.ogDescription} />
+        <meta property="og:url" content={meta.ogUrl} />
+        <meta property="og:image" content={meta.ogImage} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content={meta.twitterCard} />
+        <meta name="twitter:title" content={meta.twitterTitle} />
+        <meta name="twitter:description" content={meta.twitterDescription} />
+        <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
       <section className="py-24 bg-black min-h-screen">

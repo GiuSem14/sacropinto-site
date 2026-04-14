@@ -1,14 +1,37 @@
 import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
-import { buildTitle } from "../utils/seo"
+import { buildMeta } from "../utils/seo"
 import { CONTACT, HOURS } from "../utils/constants"
 
 export default function Contact() {
+  const meta = buildMeta({
+    title: "Contatti",
+    description: "Contatta Sacropinto tattoo studio a Piazza Armerina. Prenota una consulenza gratuita, scrivici su WhatsApp o vieni a trovarci in studio.",
+    path: "/contatti",
+  })
+
   return (
     <>
       <Helmet>
-        <title>{buildTitle("Contatti")}</title>
-        <meta name="description" content="Contatta Sacropinto tattoo studio a Piazza Armerina. Prenota una consulenza gratuita, scrivici su WhatsApp o vieni a trovarci in studio." />
+        {/* Base SEO */}
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
+        <link rel="canonical" href={meta.canonical} />
+
+        {/* Open Graph — Facebook, WhatsApp, LinkedIn */}
+        <meta property="og:type" content={meta.ogType} />
+        <meta property="og:site_name" content={meta.ogSiteName} />
+        <meta property="og:locale" content={meta.ogLocale} />
+        <meta property="og:title" content={meta.ogTitle} />
+        <meta property="og:description" content={meta.ogDescription} />
+        <meta property="og:url" content={meta.ogUrl} />
+        <meta property="og:image" content={meta.ogImage} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content={meta.twitterCard} />
+        <meta name="twitter:title" content={meta.twitterTitle} />
+        <meta name="twitter:description" content={meta.twitterDescription} />
+        <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
       <section className="py-24 bg-black min-h-screen">
