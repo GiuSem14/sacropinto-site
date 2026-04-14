@@ -1,6 +1,7 @@
 export const SITE_NAME = "Sacropinto"
 export const SITE_DESCRIPTION = "Studio di tatuaggi a Piazza Armerina. Arte sulla pelle, qualità artigianale."
 export const SITE_URL = "https://sacropinto.it"
+export const OG_IMAGE = "/og-image.jpg"
 
 export const CONTACT = {
   address: "Piazza Armerina, Enna, Sicilia",
