@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async"
+﻿import { Helmet } from "react-helmet-async"
 import { FaInstagram } from "react-icons/fa"
 import Container from "../components/layout/Container"
 import { artistsData } from "../data/artists"
@@ -41,7 +41,7 @@ export default function Artists() {
 
           <div className="max-w-2xl mb-16">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Chi siamo</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Gli artisti</h1>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Gli artisti</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
               Dietro ogni tatuaggio c'è una persona. Conosci chi lavora in Sacropinto, i loro stili e la loro storia.
             </p>

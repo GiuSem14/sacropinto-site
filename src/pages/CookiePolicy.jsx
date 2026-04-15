@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async"
+﻿import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
 import { buildMeta } from "../utils/seo"
 import { CONTACT } from "../utils/constants"
@@ -23,7 +23,7 @@ export default function CookiePolicy() {
       <section className="py-24 bg-black min-h-screen">
         <Container>
           <div className="max-w-2xl mx-auto">
-            <h1 className="text-4xl font-bold text-white mb-2">Cookie Policy</h1>
+            <h1 className="font-display text-4xl font-bold text-white mb-2">Cookie Policy</h1>
             <p className="text-gray-500 text-sm mb-12">Ultimo aggiornamento: aprile 2026</p>
             <div className="flex flex-col gap-10 text-gray-400 leading-relaxed">
               <div>

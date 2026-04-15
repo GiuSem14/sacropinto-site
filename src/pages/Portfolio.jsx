@@ -1,4 +1,4 @@
-import { useState } from "react"
+﻿import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
 import { portfolioData, portfolioStyles } from "../data/portfolio"
@@ -47,7 +47,7 @@ export default function Portfolio() {
 
           <div className="max-w-2xl mb-12">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">I nostri lavori</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Portfolio</h1>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Portfolio</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
               Ogni tatuaggio è un progetto unico. Esplora i nostri lavori e trovaci lo stile che fa per te.
             </p>

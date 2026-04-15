@@ -1,4 +1,4 @@
-import { useState } from "react"
+﻿import { useState } from "react"
 import { Helmet } from "react-helmet-async"
 import { faqData } from "../data/faq"
 import Container from "../components/layout/Container"
@@ -61,7 +61,7 @@ export default function Faq() {
         <Container>
           <div className="max-w-2xl mx-auto">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Hai dei dubbi?</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Domande frequenti</h1>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Domande frequenti</h1>
             <p className="text-gray-400 mb-12 text-lg">
               Tutto quello che devi sapere prima di prenotare il tuo tatuaggio a Piazza Armerina.
             </p>

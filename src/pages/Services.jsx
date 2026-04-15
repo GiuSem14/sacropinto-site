@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async"
+﻿import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
 import { servicesData } from "../data/services"
 import { buildMeta } from "../utils/seo"
@@ -40,7 +40,7 @@ export default function Services() {
 
           <div className="max-w-2xl mb-16">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Cosa facciamo</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Servizi</h1>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Servizi</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
               Ogni progetto è unico. Che tu abbia un'idea precisa o un vago senso di quello che vuoi, siamo qui per trasformarla in qualcosa di permanente e personale.
             </p>

@@ -1,4 +1,4 @@
-import Button from "../ui/Button"
+﻿import Button from "../ui/Button"
 import { CONTACT } from "../../utils/constants"
 
 export default function Hero() {
@@ -15,7 +15,7 @@ export default function Hero() {
           Tattoo Studio — Piazza Armerina, Sicilia
         </p>
 
-        <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-white mb-6 leading-none">
+        <h1 className="font-display text-6xl md:text-8xl font-bold tracking-tight text-white mb-6 leading-none">
           SACROPINTO
         </h1>
 

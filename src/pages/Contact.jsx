@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async"
+﻿import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
 import { buildMeta } from "../utils/seo"
 import { CONTACT, HOURS, GOOGLE_MAPS_EMBED_URL } from "../utils/constants"
@@ -39,7 +39,7 @@ export default function Contact() {
 
           <div className="max-w-2xl mb-16">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Vieni a trovarci</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Contatti</h1>
+            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Contatti</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
               Hai un progetto in mente? Scrivici, chiamaci o passa direttamente in studio. La prima consulenza è sempre gratuita.
             </p>
