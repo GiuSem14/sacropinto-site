@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { HelmetProvider } from "react-helmet-async"
 import { CookieConsentProvider } from "./context/CookieConsentContext"
 import CookieBanner from "./components/cookie/CookieBanner"
+import Analytics from "./components/analytics/Analytics"
 import Navbar from "./components/layout/Navbar"
 import Footer from "./components/layout/Footer"
 import useScrollToTop from "./hooks/useScrollToTop"
@@ -26,6 +27,7 @@ export default function App() {
       <BrowserRouter>
         <CookieConsentProvider>
           <ScrollToTop />
+          <Analytics />
           <div className="flex flex-col min-h-screen bg-black text-white">
             <Navbar />
             <main className="flex-grow pt-16">

@@ -3,6 +3,11 @@ export const SITE_DESCRIPTION = "Studio di tatuaggi a Piazza Armerina. Arte sull
 export const SITE_URL = "https://sacropinto.it"
 export const OG_IMAGE = "/og-image.jpg"
 
+// Analytics — see lib/analytics.js for usage
+export const ANALYTICS_PROVIDER = "google" // "google" | "plausible" | "none"
+export const ANALYTICS_GA4_ID = "G-PLACEHOLDER"
+export const ANALYTICS_PLAUSIBLE_DOMAIN = "sacropinto.it"
+
 export const CONTACT = {
   address: "Piazza Armerina, Enna, Sicilia",
   phone: "+39 000 000 0000",
