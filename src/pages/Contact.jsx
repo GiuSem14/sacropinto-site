@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
 import { buildMeta } from "../utils/seo"
-import { CONTACT, HOURS } from "../utils/constants"
+import { CONTACT, HOURS, GOOGLE_MAPS_EMBED_URL } from "../utils/constants"
 
 export default function Contact() {
   const meta = buildMeta({
@@ -107,6 +107,26 @@ export default function Contact() {
             </div>
 
           </div>
+
+          {/* Mappa */}
+          {GOOGLE_MAPS_EMBED_URL && (
+            <div className="mt-20">
+              <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Dove siamo</p>
+              <div className="w-full aspect-[16/9] md:aspect-[21/9] border border-gray-800 overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
+                <iframe
+                  src={GOOGLE_MAPS_EMBED_URL}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Mappa di Sacropinto Tattoo Studio"
+                />
+              </div>
+            </div>
+          )}
+
         </Container>
       </section>
     </>
