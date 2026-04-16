@@ -87,7 +87,7 @@ export default function Contact() {
             {/* Form */}
             <div>
               <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Scrivici</p>
-              <form action="https://formspree.io/f/TUOID" method="POST" className="flex flex-col gap-5">
+              <form action="https://formspree.io/f/xbdqgrjr" method="POST" className="flex flex-col gap-5">
                 <div>
                   <label className="text-gray-500 text-xs uppercase tracking-widest block mb-2">Nome</label>
                   <input type="text" name="nome" required className="w-full bg-gray-900 border border-gray-800 text-white px-4 py-3 focus:outline-none focus:border-gray-600 transition-colors" placeholder="Il tuo nome" />
