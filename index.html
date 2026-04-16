@@ -15,9 +15,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- Default SEO (overridden per page via react-helmet-async) -->
+    <!--
+      Base SEO — these are the fallback meta tags used when:
+      1. Social crawlers fetch the raw HTML (before React mounts)
+      2. React hasn't loaded yet (first paint)
+
+      React Helmet overrides these at runtime with page-specific values.
+      Since social crawlers (Facebook, WhatsApp, LinkedIn) do NOT execute
+      JavaScript, the values below are what will be shown in link previews.
+
+      When adapting for a new client, update all URLs/descriptions here.
+    -->
+
     <title>Sacropinto — Tattoo Studio a Piazza Armerina</title>
     <meta name="description" content="Sacropinto è uno studio di tatuaggi a Piazza Armerina, Sicilia. Tatuaggi personalizzati, cover-up e consulenza gratuita." />
+    <link rel="canonical" href="https://sacropinto.it/" />
+
+    <!-- Open Graph — Facebook, WhatsApp, LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sacropinto" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:title" content="Sacropinto — Tattoo Studio a Piazza Armerina" />
+    <meta property="og:description" content="Sacropinto è uno studio di tatuaggi a Piazza Armerina, Sicilia. Tatuaggi personalizzati, cover-up e consulenza gratuita." />
+    <meta property="og:url" content="https://sacropinto.it/" />
+    <meta property="og:image" content="https://sacropinto.it/og-image.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sacropinto — Tattoo Studio a Piazza Armerina" />
+    <meta name="twitter:description" content="Sacropinto è uno studio di tatuaggi a Piazza Armerina, Sicilia. Tatuaggi personalizzati, cover-up e consulenza gratuita." />
+    <meta name="twitter:image" content="https://sacropinto.it/og-image.jpg" />
   </head>
   <body>
     <div id="root"></div>
