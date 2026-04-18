@@ -1,12 +1,24 @@
-﻿import Button from "../ui/Button"
+import Button from "../ui/Button"
 import { CONTACT } from "../../utils/constants"
+import sfondoBg from "../../assets/Sfondo.JPG"
 
 export default function Hero() {
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-black overflow-hidden">
 
-      {/* Sfondo con gradiente */}
-      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-black to-black" />
+      {/* Immagine di sfondo */}
+      <img
+        src={sfondoBg}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+
+      {/* Overlay scuro per leggibilità */}
+      <div className="absolute inset-0 bg-black/20" />
+
+      {/* Fade verso il basso */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1a1210]/80" />
 
       {/* Contenuto */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
