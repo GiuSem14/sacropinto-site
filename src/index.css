@@ -4,6 +4,20 @@
 @theme {
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
   --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+
+  --color-black: #1a1210;
+  --color-white: #f5f0e8;
+  --color-gray-50: #f0ebe3;
+  --color-gray-100: #e5ddd3;
+  --color-gray-200: #d4cabb;
+  --color-gray-300: #b8a999;
+  --color-gray-400: #a39585;
+  --color-gray-500: #8a7a6a;
+  --color-gray-600: #6b5a4a;
+  --color-gray-700: #4a3a2e;
+  --color-gray-800: #3a2a1e;
+  --color-gray-900: #241a14;
+  --color-gray-950: #1a1210;
 }
 
 html {
@@ -11,8 +25,8 @@ html {
 }
 
 body {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #1a1210;
+  color: #f5f0e8;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
