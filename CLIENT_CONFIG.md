@@ -8,8 +8,6 @@
 
 ## Quick Checklist
 
-Use this checklist when you already know the process and just need a reminder of the steps. Detailed instructions follow below.
-
 ### Phase 0 — Preparation
 - [ ] Collect all content and credentials from client (see Pre-requisites)
 - [ ] Create a new private GitHub repo for the client project
@@ -22,157 +20,89 @@ Use this checklist when you already know the process and just need a reminder of
 - [ ] Update `README.md` with new client info
 
 ### Phase 2 — Content
-- [ ] Update `src/utils/constants.js` (SITE_NAME, SITE_DESCRIPTION, SITE_URL, CONTACT, HOURS)
-- [ ] Replace placeholder data in `src/data/artists.js`
-- [ ] Replace placeholder data in `src/data/portfolio.js`
+- [ ] Update `src/utils/constants.js` (SITE_NAME, SITE_DESCRIPTION, SITE_URL, CONTACT, HOURS, ANALYTICS)
+- [ ] Replace placeholder data in `src/data/artists.js` (import real photos)
+- [ ] Replace placeholder data in `src/data/portfolio.js` (images + styles + titles + alt text)
 - [ ] Replace placeholder data in `src/data/services.js`
 - [ ] Review and adapt `src/data/faq.js`
-- [ ] Update meta descriptions in each page (`src/pages/*.jsx`)
 
 ### Phase 3 — Assets
-- [ ] Replace favicon in `public/` (all formats)
-- [ ] Add client logo (if any) to `src/assets/`
-- [ ] Upload portfolio images to `public/portfolio/` or equivalent
-- [ ] Upload artist photos to `public/artists/` or equivalent
-- [ ] Optimize all images (WebP, correct dimensions)
+- [ ] Replace favicon letter in `public/favicon.svg`
+- [ ] Upload portfolio images to `src/assets/`
+- [ ] Upload artist photos to `src/assets/`
+- [ ] Replace Hero background (`src/assets/Sfondo.JPG`)
+- [ ] Generate new OG image (`public/og-image.jpg`)
+- [ ] Optimize all images
 
-### Phase 4 — Integrations
-- [ ] Configure Formspree endpoint in `src/pages/Contact.jsx`
+### Phase 4 — Brand Identity
+- [ ] Extract color palette from client brand reference
+- [ ] Update `@theme` overrides in `src/index.css`
+- [ ] Update body background-color and color in `src/index.css`
+- [ ] Review font pairing — update in `index.html` + `src/index.css` if needed
+- [ ] Update static OG tags in `index.html`
+
+### Phase 5 — Integrations
+- [ ] Create Formspree form → update endpoint in `Contact.jsx`
 - [ ] Test contact form end-to-end
-- [ ] (Optional) Configure Google Analytics / Plausible
-- [ ] (Optional) Configure Google Maps embed in Contact page
+- [ ] Create GA4 property → replace `G-PLACEHOLDER` in `constants.js`
+- [ ] Update Google Maps embed URL in `constants.js`
+- [ ] Create Google My Business listing
+- [ ] Set up Google Form feedback (optional)
 
-### Phase 5 — Pre-deploy testing
-- [ ] Test all routes in incognito mode
-- [ ] Test responsive layout (desktop, tablet, mobile)
-- [ ] Verify all links work (internal + external)
-- [ ] Verify contact form submission
-- [ ] Verify social icons open correct profiles
-- [ ] Test on 2+ different browsers (Chrome, Firefox)
-- [ ] Run `npm run build` to ensure production build works
-- [ ] Check console for errors/warnings
+### Phase 6 — Pre-deploy Testing
+- [ ] All 9 routes load (8 pages + 404)
+- [ ] Responsive layout (375px, 768px, 1024px, 1920px)
+- [ ] Contact form, WhatsApp button, cookie banner, lightbox, CTA scroll all work
+- [ ] `npm run build` — zero errors
+- [ ] Lighthouse on Vercel: Performance >85, Accessibility >90, SEO >90
 
-### Phase 6 — Deploy
+### Phase 7 — Deploy
 - [ ] Connect GitHub repo to Vercel
-- [ ] Configure custom domain in Vercel
-- [ ] Verify DNS propagation
-- [ ] Test production URL
-- [ ] Verify HTTPS is active
+- [ ] Configure custom domain + DNS
+- [ ] Verify HTTPS + OG image reachable on real domain
 
-### Phase 7 — Handover
-- [ ] Send client deploy URL and credentials
-- [ ] Provide instructions for future content updates
+### Phase 8 — Measurement Setup
+- [ ] Collect baseline data from client
+- [ ] Give client Google Form feedback link
+- [ ] Verify GA4 realtime data flow
+- [ ] Schedule monthly report cadence
+
+### Phase 9 — Handover
+- [ ] Send client live URL + credentials
 - [ ] Send invoice
-- [ ] Archive project files
+- [ ] Archive project (`git tag v1.0-launch`)
 
 ---
 
 ## Pre-requisites
 
-Before starting, collect the following from the client. **Do not start development until you have at least the mandatory items** — otherwise you'll end up with placeholder content in production.
+### Mandatory
+- Studio name and tagline
+- Physical address (Contact page, Google Maps, SEO)
+- Phone / WhatsApp number (FloatingWhatsApp + Navbar + Contact)
+- Email address (Formspree destination)
+- Instagram handle / URL
+- Business hours (all 7 days)
+- List of artists: name, role, bio, styles, experience, Instagram, portrait photo
+- List of services (confirm if piercing is offered)
+- Portfolio: 10-15+ high-quality images with style category and title
+- FAQ answers adapted to studio policies
+- Legal info: VAT number, legal entity name
 
-### Mandatory (block starting the project)
-- **Studio name and tagline**
-- **Physical address** (for Contact page and SEO)
-- **Phone / WhatsApp number** (real, working)
-- **Email address** (real, working)
-- **Instagram handle / URL**
-- **Business hours** (all 7 days of the week)
-- **List of artists** with: name, role, bio, styles, years of experience, Instagram handle
-- **List of services** offered (name + description for each)
-- **Portfolio**: at least 10-15 high-quality images of real work, with style category and title
-- **FAQ answers** adapted to the specific studio's policies (deposit, minors, walk-ins, etc.)
-- **Legal info**: VAT number, legal entity name for Privacy/Cookie policies
-
-### Recommended (can start without, but collect ASAP)
-- **Artist photos** (portrait shots, min 1000x1000px)
-- **Logo** in vector format (SVG preferred)
-- **Brand color palette** (primary, secondary, accent)
-- **Typography preferences** (any specific fonts?)
-- **Google Maps link** to their location
-- **Social accounts** beyond Instagram (TikTok, Facebook, etc.)
-- **Testimonials** from existing clients
-
-### Optional (nice to have)
-- Short video / reel for homepage hero
-- Custom domain already purchased
-- Formspree account (or we create one on behalf of client)
-- Google Analytics / Google Business account
+### Recommended
+- Logo (SVG or high-res PNG)
+- Brand color palette or brand reference image
+- Typography preferences
+- Google Maps link
+- Other social accounts (TikTok, Facebook)
+- Studio interior/exterior photos for Hero texture
+- Google account (for GA4 + Google My Business)
 
 ---
 
-## Phase 1 — Setup
+## Phase 2 — Content (detailed)
 
-### 1.1 Clone the template
-
-Open a terminal in your projects folder:
-
-```powershell
-cd C:\Dev\Projects\React
-git clone https://github.com/GiuSem14/sacropinto-site.git client-studio-name
-cd client-studio-name
-```
-
-Replace `client-studio-name` with a meaningful short name (e.g., `dragontattoo-milano`, `inkstudio-roma`).
-
-### 1.2 Reset Git history for the new project
-
-The cloned project has all of Sacropinto's commit history. For a new client, start fresh:
-
-```powershell
-Remove-Item -Recurse -Force .git
-git init
-git add .
-git commit -m "chore: initial commit from sacropinto-site template"
-```
-
-### 1.3 Create new GitHub repo
-
-Create a new **private** repo on GitHub for this client (don't reuse the same repo). Then connect:
-
-```powershell
-git remote add origin https://github.com/GiuSem14/<new-repo-name>.git
-git branch -M main
-git push -u origin main
-```
-
-### 1.4 Update `package.json`
-
-Change the `name` field to match the new project:
-
-```json
-{
-  "name": "client-studio-name",
-  "version": "0.1.0",
-  ...
-}
-```
-
-### 1.5 Install dependencies
-
-```powershell
-npm install
-```
-
-### 1.6 Verify the template runs
-
-```powershell
-npm run dev
-```
-
-Open `http://localhost:5173` in incognito mode and verify the template loads correctly with Sacropinto's placeholder content. This is your starting baseline.
-
----
-
-## Phase 2 — Content
-
-All client-specific content lives in **two places**:
-- `src/utils/constants.js` → identity and contact info
-- `src/data/*.js` → collections (artists, portfolio, services, FAQ)
-
-### 2.1 Update `src/utils/constants.js`
-
-This is the most critical file. Update every field:
+### 2.1 constants.js
 
 ```js
 export const SITE_NAME = "Studio Name"
@@ -180,296 +110,175 @@ export const SITE_DESCRIPTION = "Short description for meta tags"
 export const SITE_URL = "https://studio-domain.it"
 
 export const CONTACT = {
-  address: "Full address, City, Province",
+  address: "Full address, City, Province, Region",
   phone: "+39 XXX XXX XXXX",
   whatsapp: "+39 XXX XXX XXXX",
   email: "info@studio-domain.it",
   instagram: "https://www.instagram.com/studio-handle",
-  googleMapsUrl: "https://maps.google.com/?q=...",
-  googleMapsEmbed: "<iframe embed code from Google Maps>",
 }
+
+export const GOOGLE_MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=..."
 
 export const HOURS = [
   { day: "Lunedì", hours: "Chiuso" },
   { day: "Martedì", hours: "10:00 – 19:00" },
-  // ... update all 7 days
+  // ... all 7 days
 ]
 
-export const NAV_LINKS = [
-  // Usually no changes needed — routes stay the same
-]
+export const ANALYTICS_PROVIDER = "google"
+export const ANALYTICS_ID = "G-XXXXXXXXXX"
 ```
 
-### 2.2 Update `src/data/artists.js`
-
-Replace the placeholder artist with real data. Add one object per artist:
+### 2.2 artists.js
 
 ```js
+import artistPhoto from "../assets/Artista1.jpg"
+
 export const artistsData = [
   {
     id: 1,
-    name: "Real Artist Name",
-    role: "Tattoo Artist / Owner / etc.",
-    bio: "Real biography with style philosophy and approach.",
-    styles: ["Blackwork", "Realistico", ...],
+    name: "Artist Name",
+    role: "Tattoo Artist & Founder",
+    bio: "Real biography.",
+    styles: ["Blackwork", "Realistico", "Neo-Traditional"],
     experience: "X anni di esperienza",
-    instagram: "https://www.instagram.com/artist-handle",
-    image: "/artists/artist-name.jpg",  // path to image in public/
+    instagram: "https://www.instagram.com/...",
+    image: artistPhoto,
+    alt: "Artist Name, tattoo artist at Studio Name",
   },
-  // ... more artists
 ]
 ```
 
-### 2.3 Update `src/data/portfolio.js`
-
-Replace placeholder opere with real portfolio pieces:
+### 2.3 portfolio.js
 
 ```js
+import tattoo1 from "../assets/Tattoo1.jpg"
+
 export const portfolioData = [
   {
     id: 1,
-    title: "Title of the work",
-    style: "Blackwork",  // must match a style in portfolioStyles
-    image: "/portfolio/work-001.jpg",
-    alt: "Descriptive alt text for accessibility and SEO",
+    title: "Descriptive Title",
+    style: "Blackwork",
+    image: tattoo1,
+    alt: "Descriptive alt text — include studio name and location",
   },
-  // ... more works
 ]
 
-export const portfolioStyles = ["Tutti", "Blackwork", "Linework", ...]
+export const portfolioStyles = ["Tutti", "Blackwork", "Realistico", ...]
 ```
 
-Also update `portfolioStyles` to match the actual styles present.
-
-### 2.4 Update `src/data/services.js`
-
-Review the default services and adapt to what this specific studio offers. Remove services they don't offer, add new ones if needed.
-
-### 2.5 Review `src/data/faq.js`
-
-Adapt answers to client-specific policies (deposit amount, minors policy, walk-ins, payment methods, etc.). Don't just copy Sacropinto's answers — each studio has different rules.
-
-### 2.6 Update meta descriptions in pages
-
-For each file in `src/pages/*.jsx`, update the `<meta name="description">` inside `<Helmet>` to reflect the new studio name and location. Keep meta descriptions between 140-160 characters for SEO.
-
 ---
 
-## Phase 3 — Assets
+## Phase 4 — Brand Identity (detailed)
 
-### 3.1 Favicon
+### 4.1 Color palette
 
-The template uses a simple SVG-only favicon at `public/favicon.svg` with a single letter on a black background (default: "S" for Sacropinto). SVG is supported by all modern browsers and scales perfectly at any size.
+Override Tailwind defaults in `@theme` block of `src/index.css`:
 
-**To adapt the favicon for a new client**:
-
-1. Open `public/favicon.svg` in any text editor (e.g., VS Code)
-2. Locate the `<text>` element — it contains a single letter
-3. Replace the letter with the client's initial (e.g., "D" for "Dragon Tattoo", "I" for "Ink Studio")
-4. Optionally, change `fill="#000000"` (background) or `fill="#ffffff"` (text color) to match the client's brand palette
-5. Save the file
-
-**To update the title and meta description** shown in browser tabs before React mounts:
-
-1. Open `index.html` at the project root
-2. Update the `<title>` tag with the client's studio name
-3. Update the `<meta name="description">` tag with a short client-specific description
-4. Update the `<meta name="theme-color">` to match the client's brand color (controls the mobile browser bar color)
-5. Also ensure `<html lang="it">` matches the actual site language
-
-**Note**: avoid PNG fallbacks unless targeting very old browsers — they require additional files and generation steps without real-world benefit. All browsers released after 2020 support SVG favicons natively.
-
-### 3.2 Logo
-
-If the client provides a logo image, add it to `src/assets/logo.svg` (or `.png`) and update `Navbar.jsx` to use it instead of the text logo. Otherwise, keep the text logo with the studio name.
-
-### 3.3 Portfolio images
-
-Create `public/portfolio/` and upload all portfolio images. Recommendations:
-- **Format**: WebP (better compression) with JPG fallback
-- **Dimensions**: 1200x1200px (square) for portfolio grid
-- **File size**: < 200KB per image after compression
-- **Naming**: descriptive filenames (e.g., `blackwork-dragon-01.webp`)
-
-### 3.4 Artist photos
-
-Create `public/artists/` and upload artist portraits. Same recommendations as portfolio.
-
-### 3.5 Image optimization
-
-Before deploy, run images through a compressor:
-- **Online**: squoosh.app (Google, free)
-- **CLI**: `sharp-cli` or `imagemin`
-
-Target: < 100KB per image when possible.
-
----
-
-## Phase 4 — Integrations
-
-### 4.1 Formspree (contact form)
-
-1. Create a Formspree account (or use the agency's master account)
-2. Create a new form for this client
-3. Copy the form endpoint URL (looks like `https://formspree.io/f/XXXXXXXX`)
-4. Open `src/pages/Contact.jsx` and replace the placeholder endpoint:
-
-```jsx
-<form action="https://formspree.io/f/TUOID" method="POST" ...>
+```css
+@theme {
+  --color-black: #XXXXXX;
+  --color-white: #XXXXXX;
+  --color-gray-50 through --color-gray-950: full scale
+}
 ```
 
-Replace `TUOID` with the real form ID.
+All components use Tailwind classes (`bg-black`, `text-white`, `text-gray-400`) which resolve to these overrides. **Zero component files need editing.**
 
-5. Test the form by submitting a test message and verifying it arrives.
+Sacropinto reference: warm earth tones (`#1a1210` dark → `#f5f0e8` light).
 
-### 4.2 Google Analytics (optional)
+### 4.2 Fonts
 
-If the client wants analytics:
-1. Create a GA4 property in the client's Google account
-2. Add the tracking script to `index.html` or use a React wrapper
-3. Test that data flows after 24 hours
+Two files to edit:
+1. `index.html` — Google Fonts `<link>` tag
+2. `src/index.css` — `--font-sans` and `--font-display` in `@theme`
 
-### 4.3 Google Maps embed (optional)
+Change time: ~5 minutes.
 
-1. Go to Google Maps, find the studio location
-2. Click "Share" → "Embed a map" → copy the HTML iframe
-3. Paste the iframe src into `CONTACT.googleMapsEmbed` in `constants.js`
-4. Add the iframe rendering in `Contact.jsx`
+### 4.3 Static OG tags
 
----
+Update `index.html` with client-specific title, description, canonical URL, og:image URL. These are what social crawlers see (they don't execute JS).
 
-## Phase 5 — Pre-deploy Testing
+### 4.4 OG image generation
 
-Run through this checklist **before** deploying to production. Better to catch bugs now than have the client find them.
-
-### Functional tests
-- [ ] All 8 routes load without errors
-- [ ] Navbar links navigate correctly
-- [ ] Footer links navigate correctly
-- [ ] Contact form submits successfully (test with real submission)
-- [ ] Social icons in navbar open Instagram and WhatsApp correctly
-- [ ] Social icons in footer open correctly
-- [ ] Phone/email links work (`tel:` and `mailto:`)
-- [ ] Portfolio filters work for all styles
-
-### Visual tests
-- [ ] Layout is centered on wide monitors (no left-alignment bug)
-- [ ] All images load correctly (no broken links)
-- [ ] Responsive layout works at 375px, 768px, 1024px, 1920px
-- [ ] No horizontal scroll at any breakpoint
-- [ ] All text is readable (contrast, size)
-- [ ] Italian characters render correctly (`à`, `è`, `ì`, `ò`, `ù`, `€`, `©`)
-
-### Technical tests
-- [ ] `npm run build` completes without errors
-- [ ] Browser console shows zero errors
-- [ ] Lighthouse score > 85 for Performance, Accessibility, SEO
-- [ ] All meta descriptions are 140-160 characters
-- [ ] All images have meaningful `alt` text
-- [ ] Favicon displays in browser tab
-- [ ] Page titles are unique per page
-
-### Browser tests
-- [ ] Chrome (latest)
-- [ ] Firefox (latest)
-- [ ] Safari (if available)
-- [ ] Mobile Chrome on a real phone
+```bash
+convert TattooPhoto.jpg \
+  -resize 1200x630^ -gravity center -extent 1200x630 \
+  \( +clone -fill black -colorize 55% \) -composite \
+  -gravity center -fill white -font "DejaVu-Sans-Bold" \
+  -pointsize 80 -annotate +0-20 "STUDIO NAME" \
+  -pointsize 30 -annotate +0+50 "TATTOO STUDIO — CITY" \
+  public/og-image.jpg
+```
 
 ---
 
-## Phase 6 — Deploy
+## Phase 5 — Integrations (detailed)
 
-### 6.1 Vercel deployment
+### 5.1 Formspree
+1. Login formspree.io (Google auth)
+2. Create form → copy endpoint ID
+3. Replace in `Contact.jsx`: `action="https://formspree.io/f/NEW_ID"`
+4. Test with real submission
 
-1. Log in to Vercel with the agency's account
-2. Click "New Project" → "Import Git Repository"
-3. Select the client's GitHub repo
-4. Vercel auto-detects Vite — accept default settings
-5. Click "Deploy"
-6. Wait for first build to complete (1-3 minutes)
-7. Test the provided `*.vercel.app` URL
+### 5.2 Google Analytics
+1. Create GA4 property → get Measurement ID
+2. Replace `G-PLACEHOLDER` in `constants.js`
+3. System is consent-aware (fires only after cookie acceptance)
+4. Test via GA4 Realtime report
 
-### 6.2 Custom domain
+### 5.3 Google Maps
+1. Google Maps → find studio → Share → Embed → copy `src` URL
+2. Update `GOOGLE_MAPS_EMBED_URL` in `constants.js`
+3. Contact page renders automatically with grayscale hover effect
 
-1. In Vercel project → Settings → Domains
-2. Add the client's domain (e.g., `studiotattoo.it`)
-3. Follow Vercel's DNS configuration instructions
-4. Update DNS records at the domain registrar (Aruba, Register, etc.)
-5. Wait for propagation (can take 1-24 hours)
-6. Verify HTTPS is active (automatic via Vercel)
+### 5.4 Google My Business
+1. business.google.com → Add business
+2. Fill: name, category "Tattoo shop", address, phone, hours, website
+3. Verify → add photos and description
+4. High-value free service — offer as bonus to clients
 
-### 6.3 Production verification
-
-After deploy, run the Phase 5 tests again on the live URL. Things that worked locally may break in production due to:
-- Different environment variables
-- Missing build optimizations
-- Asset loading paths
-
----
-
-## Phase 7 — Handover
-
-### 7.1 Documentation for the client
-
-Send the client a short handover document including:
-- **Live URL** of the website
-- **How to request content changes** (email/WhatsApp to you)
-- **Social account links** that are connected
-- **Formspree account info** (if they'll manage it themselves)
-- **Your support policy** (e.g., "30 days of free bug fixes after launch")
-
-### 7.2 Credentials to transfer
-
-Depending on the agreement, transfer or keep the following:
-- Vercel project access
-- GitHub repo access
-- Domain registrar credentials
-- Formspree access
-- Google Analytics access
-
-### 7.3 Invoicing
-
-Send the invoice with:
-- Project description
-- Agreed price
-- Payment terms
-- Bank details or payment link
-
-### 7.4 Archive
-
-- Tag the final commit in Git (`git tag v1.0-launch`)
-- Keep a local backup of the final project folder
-- Archive client communications in a dedicated folder
+### 5.5 Measurement setup
+1. Collect baseline from client (monthly clients, traffic sources)
+2. Create Google Form (3 sections: discovery channel, booking method, rating)
+3. Connect to Google Sheet
+4. Give client WhatsApp template for post-session feedback
+5. Monthly: compile GA4 + Formspree + Google Form data
 
 ---
 
 ## Estimated Timeline
 
-For a solo developer with all content ready:
-
 | Phase | Time |
 |-------|------|
 | Phase 1 — Setup | 30 min |
-| Phase 2 — Content | 3-5 hours |
-| Phase 3 — Assets | 2-4 hours |
-| Phase 4 — Integrations | 1 hour |
-| Phase 5 — Testing | 1-2 hours |
-| Phase 6 — Deploy | 30 min |
-| Phase 7 — Handover | 1 hour |
-| **Total** | **9-14 hours** |
+| Phase 2 — Content | 2-3 hours |
+| Phase 3 — Assets | 1-2 hours |
+| Phase 4 — Brand Identity | 1 hour |
+| Phase 5 — Integrations | 1-2 hours |
+| Phase 6 — Testing | 1 hour |
+| Phase 7 — Deploy | 30 min |
+| Phase 8-9 — Measurement + Handover | 1 hour |
+| **Total** | **7-10 hours** |
 
-Spread this over 2-3 working days to allow for review iterations with the client.
+With Claude Code, Phase 2-4 can be done in ~3 hours. Spread over 2 working days for client review.
 
 ---
 
-## Lessons Learned (update after each project)
+## Lessons Learned
 
-> Add notes here after completing each client project. What went well? What slowed you down? What would you change next time?
-
-### Project #0 — Sacropinto (template baseline)
-- Initial template development
-- Discovered lucide-react v1.0 removed brand icons — switched to react-icons
-- Fixed universal CSS selector bug that broke Tailwind v4 centering
+### Project #0 — Sacropinto (April 2026)
+- lucide-react v1.0 removed brand icons — use react-icons/fa
+- Universal CSS reset breaks Tailwind v4 centering — never add one
+- Google Translate auto-translates nav labels — test in incognito
+- OpenCode Big Pickle unreliable — use Claude Code CLI
+- Lighthouse localhost scores artificially low — test on Vercel production
+- SPA + social crawlers: static OG fallback tags in index.html are essential
+- Fixed navbar covers anchor targets — use scroll-mt-24 + setTimeout
+- Brand palette: override @theme defaults, zero component changes needed
+- Formspree free: 50 submissions/month, sufficient for small studios
+- Vercel free: auto-deploy, HTTPS, CDN — zero hosting cost
+- Performance: 85/96/100/100 on Vercel (LCP 4.1s, improvable with WebP)
 
 ### Project #1 — [Next client]
-- [ ] To be filled after first real client
+- [ ] To be filled
