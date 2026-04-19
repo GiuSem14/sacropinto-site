@@ -11,8 +11,8 @@ This project also serves as a **reusable template** for future tattoo studio web
 This codebase is designed as a **white-label template** that can be quickly adapted for new tattoo studio clients. The core strategy is:
 
 - **Content is data, not code**: everything client-specific (studio name, contact info, artists, services, portfolio items, FAQ) lives in `src/utils/constants.js` and `src/data/*.js`. Components are generic and read from these files.
-- **Visual identity is configurable**: colors, fonts, and brand assets should be easy to swap without touching component logic.
-- **Legal/technical requirements are pre-built**: features like cookie banners, SEO meta tags, GDPR compliance, and accessibility are implemented once in the template and reused for every client.
+- **Visual identity is configurable**: colors are defined as Tailwind `@theme` overrides in `src/index.css`. Fonts are loaded via Google Fonts in `index.html`. Swapping the entire visual identity requires editing only 2 files.
+- **Legal/technical requirements are pre-built**: cookie consent (GDPR), SEO meta system, sitemap, robots.txt, analytics integration, and accessibility are implemented once and reused for every client.
 - **Component reusability first**: when adding new features, prefer generic reusable components over client-specific one-offs.
 
 When making changes, **ask yourself**: "Would this change still make sense if we were building this site for a different tattoo studio?" If not, it probably shouldn't be hardcoded.
@@ -23,11 +23,14 @@ When making changes, **ask yourself**: "Would this change still make sense if we
 - **Build tool**: Vite
 - **Styling**: Tailwind CSS **v4** (via `@tailwindcss/vite` plugin) — CSS-first config, no `tailwind.config.js`
 - **Routing**: React Router (v6+)
-- **SEO**: react-helmet-async
+- **SEO**: react-helmet-async with `buildMeta()` helper in `src/utils/seo.js`
 - **Icons**:
   - `lucide-react` for generic UI icons (Menu, X, arrows, etc.)
   - `react-icons` for brand icons (Instagram, WhatsApp, etc.) — see Icon Policy below
-- **Deployment**: Vercel
+- **Lightbox**: `yet-another-react-lightbox` for fullscreen portfolio image viewing
+- **Deployment**: Vercel (auto-deploy on push, URL: sacropinto-site.vercel.app)
+- **Form handling**: Formspree (endpoint `xbdqgrjr`, sends to developer Gmail)
+- **Analytics**: Modular system with GA4 provider (placeholder `G-PLACEHOLDER`, consent-aware)
 - **Package manager**: npm
 - **Language**: JavaScript (NOT TypeScript)
 - **Linting**: ESLint (config in `eslint.config.js`)
@@ -38,7 +41,6 @@ This project uses **two icon libraries** for specific reasons. Follow this polic
 
 ### Use `lucide-react` for generic UI icons
 Examples: `Menu`, `X`, `ArrowRight`, `ChevronDown`, `Search`, `User`, `Mail`, `Phone`, `MapPin`, `Calendar`.
-These are non-branded, functional icons used for UI elements.
 
 ```jsx
 import { Menu, X } from "lucide-react"
@@ -46,44 +48,48 @@ import { Menu, X } from "lucide-react"
 
 ### Use `react-icons` for brand icons
 Examples: `FaInstagram`, `FaWhatsapp`, `FaFacebook`, `FaTiktok`, `FaYoutube`, `FaLinkedin`.
-These are official brand logos that were **removed from lucide-react in version 1.0** (for trademark/legal reasons). We use Font Awesome via `react-icons/fa` as the standard replacement.
 
 ```jsx
 import { FaInstagram, FaWhatsapp } from "react-icons/fa"
 ```
 
 ### Never use inline SVGs for icons
-Do NOT paste SVG markup directly into components. Always use one of the two libraries above. If a needed icon doesn't exist in either library, ask before proceeding.
+Do NOT paste SVG markup directly into components. Always use one of the two libraries above.
 
 ## Project Structure
 
 ```
 sacropinto-site/
-├── public/                 # Static assets (favicon, robots.txt, etc.)
+├── public/
+│   ├── favicon.svg         # Custom SVG favicon ("S" white on black)
+│   ├── og-image.jpg        # Open Graph image (tattoo photo + brand overlay, 1200x630)
+│   ├── sitemap.xml         # Sitemap with 8 URLs, priority/changefreq
+│   └── robots.txt          # Allow all + sitemap link
 ├── src/
-│   ├── assets/             # Project images and media
+│   ├── assets/
+│   │   ├── Artista1.jpg, Artista2.jpg  # Owner portraits
+│   │   ├── Brand.jpg       # Brand reference (color palette source, NOT used in site)
+│   │   ├── Sfondo.JPG      # Marble/stone texture (Hero background)
+│   │   └── Tattoo1-12.jpg  # Portfolio photos
 │   ├── components/
+│   │   ├── analytics/      # Analytics.jsx
+│   │   ├── cookie/         # CookieBanner.jsx, CookiePreferences.jsx
 │   │   ├── layout/         # Container, Navbar, Footer
 │   │   ├── sections/       # Hero, HomePortfolioPreview, ArtistsPreview, ServicesPreview, FAQPreview, ContactCTA
-│   │   └── ui/             # Badge, Button, Card, SectionTitle
-│   ├── data/               # Static data (placeholders to be replaced per client)
-│   │   ├── artists.js
-│   │   ├── faq.js
-│   │   ├── portfolio.js
-│   │   └── services.js
-│   ├── hooks/              # Custom React hooks (useScrollToTop)
-│   ├── pages/              # Route pages (Home, Portfolio, Artists, Services, Faq, Contact, PrivacyPolicy, CookiePolicy)
-│   ├── utils/              # Constants and helpers (constants.js, seo.js)
-│   ├── App.css             # Legacy CSS (mostly unused — Tailwind handles styling)
-│   ├── App.jsx             # Root component with router setup
-│   ├── index.css           # Tailwind entry point (@import "tailwindcss")
-│   └── main.jsx            # React entry point
-├── .gitignore
+│   │   └── ui/             # Badge, Button, Card, SectionTitle, FloatingWhatsApp
+│   ├── context/            # CookieConsentContext.jsx
+│   ├── data/               # artists.js, faq.js, portfolio.js, services.js
+│   ├── hooks/              # useScrollToTop, useCookieConsent
+│   ├── lib/                # analytics.js + providers/ (googleAnalytics.js, plausible.js)
+│   ├── pages/              # 8 pages + NotFound
+│   ├── utils/              # constants.js, cookieConsent.js, seo.js
+│   ├── App.jsx             # Router + CookieConsentProvider + FloatingWhatsApp + CookieBanner
+│   ├── index.css           # Tailwind entry + @theme overrides (brand colors + fonts)
+│   └── main.jsx
 ├── AGENTS.md               # This file
-├── eslint.config.js
-├── index.html
+├── CLIENT_CONFIG.md         # Playbook for adapting template to new clients
+├── index.html              # Static OG tags + Google Fonts + favicon
 ├── package.json
-├── README.md
 └── vite.config.js
 ```
 
@@ -92,140 +98,139 @@ sacropinto-site/
 | Route              | Page File          | Purpose                                  |
 |--------------------|--------------------|------------------------------------------|
 | `/`                | Home.jsx           | Landing page with hero and section previews |
-| `/portfolio`       | Portfolio.jsx      | Full portfolio with style filters        |
+| `/portfolio`       | Portfolio.jsx      | Full portfolio with style filters + lightbox |
 | `/artisti`         | Artists.jsx        | Artists showcase                         |
 | `/servizi`         | Services.jsx       | Services list                            |
 | `/faq`             | Faq.jsx            | Frequently asked questions               |
-| `/contatti`        | Contact.jsx        | Contact form, hours, and studio info     |
-| `/privacy-policy`  | PrivacyPolicy.jsx  | Privacy policy (legal)                   |
-| `/cookie-policy`   | CookiePolicy.jsx   | Cookie policy (legal)                    |
+| `/contatti`        | Contact.jsx        | Contact form, info cards, hours, map     |
+| `/privacy-policy`  | PrivacyPolicy.jsx  | Privacy policy (noindex)                 |
+| `/cookie-policy`   | CookiePolicy.jsx   | Cookie policy (noindex)                  |
+| `*`                | NotFound.jsx       | Custom 404 page (noindex)                |
 
-Routes intentionally mix Italian and English (`/portfolio` and `/faq` are commonly used as-is in Italian). Do not change route names without explicit approval.
+## Implemented Features
+
+### GDPR Cookie Consent ✅
+Three-category system (Necessary/Analytics/Marketing). 5 files across utils, context, hooks, components. localStorage persistence with versioning + 365-day expiry. Footer "Gestisci cookie" link reopens preferences.
+
+### SEO System ✅
+`buildMeta()` helper generates 14 OG/Twitter meta tags per page. Static fallback OG tags in `index.html` for social crawlers. Sitemap, robots.txt, custom SVG favicon. OG image: real tattoo photo with brand overlay (1200x630). All OG URLs point to `https://sacropinto.it/` (future domain).
+
+### Analytics ✅
+Modular Strategy Pattern. GA4 provider with placeholder ID `G-PLACEHOLDER`. Consent-aware via CookieConsentContext. Plausible provider also available.
+
+### Contact Form ✅
+Formspree endpoint `xbdqgrjr`. Vertical layout: 4 info cards → hours → centered form → Google Maps embed with grayscale hover effect.
+
+### Floating WhatsApp ✅
+Fixed bottom-right, green `#25D366`, z-[80]. Visible on all pages. Opens WhatsApp with studio number.
+
+### Portfolio Lightbox ✅
+`yet-another-react-lightbox`. Click image → fullscreen with navigation. Respects active style filter.
+
+### CTA → Form Scroll ✅
+"Prenota una consulenza" buttons link to `/contatti#scrivici`. `useScrollToTop` handles hash scrolling with `setTimeout(100ms)` + `scroll-mt-24` for navbar offset.
+
+### Brand Identity ✅
+Warm earth-tone palette from Brand.jpg. Tailwind `@theme` overrides: `--color-black: #1a1210`, `--color-white: #f5f0e8`, full warm gray scale. Fonts: Inter (body) + Space Grotesk (display). Hero: Sfondo.JPG marble texture with overlay. Page headers centered.
+
+### Real Content (partial) ✅
+12 tattoo photos, 2 owner portraits, real address + WhatsApp. Portfolio styles/titles/alt text still placeholder.
+
+## Pending Work
+
+### 🔴 Blocked on client
+- Full artist bio, experience, styles
+- Second artist info (business partner)
+- Real opening hours
+- Confirm piercing service
+- FAQ specifics (deposit, payment, rules)
+- Official studio email
+- More portfolio photos
+- Logo (optional)
+
+### 🔴 Blocked on purchase
+- Domain `sacropinto.it` (~10-15€/year)
+- Google account for GA4 + Google My Business
+
+### 🟡 Developer tasks
+- Classify portfolio styles (all "Blackwork" → need proper categories)
+- Portfolio titles and alt text personalization
+- Font review with client
+- Update CLIENT_CONFIG.md
+- Google My Business setup
+
+### 🟢 Post-sale
+- GA4 real ID → replace `G-PLACEHOLDER`
+- Formspree email → change to client email
+- Connect domain to Vercel
+- Verify OG image on real domain
+
+## Performance (Vercel production, April 2026)
+
+| Category | Score |
+|---|---|
+| Performance | 85 |
+| Accessibility | 96 |
+| Best Practices | 100 |
+| SEO | 100 |
+
+LCP 4.1s (improvable with WebP conversion of Sfondo.JPG). Localhost scores unreliable — always test on Vercel.
 
 ## Coding Conventions
 
-### React components
-- Functional components only, no class components
-- Hooks for state and side effects
-- **Pages**: use `default export`
-- **Components**: prefer `named exports`
-- Component files use **PascalCase** (`Navbar.jsx`, `PortfolioCard.jsx`)
-- Destructure props in the function signature
-- Wrap each page's content with `<Helmet>` from `react-helmet-async` for SEO
-
-### Page structure pattern
-```jsx
-import { Helmet } from 'react-helmet-async'
-import Container from '../components/layout/Container'
-
-export default function PageName() {
-  return (
-    <>
-      <Helmet>
-        <title>Page Title - Sacropinto</title>
-        <meta name="description" content="..." />
-      </Helmet>
-      <Container>
-        {/* page content */}
-      </Container>
-    </>
-  )
-}
-```
+### Components
+- Functional components only, hooks for state/effects
+- Pages: `default export`. Components: `named exports`
+- PascalCase filenames. Destructure props.
+- Every page wrapped with `<Helmet>` + `buildMeta()`
 
 ### Styling
-- **Tailwind v4 utility classes only** — no custom CSS unless absolutely necessary
-- Tailwind v4 uses CSS-first config: directives live inside `src/index.css`
-- Use responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`)
-- **Color palette**: dark theme with gold accents — ask before introducing new colors
-- **Always prefer `<Container>` component** for centered max-width wrappers
+- Tailwind v4 utility classes only. `@theme` in `index.css` for colors.
+- Use Tailwind classes (`bg-black`, `text-white`, `text-gray-400`) — they resolve to brand palette via `@theme` overrides. Do NOT hardcode hex values in components.
+- `<Container>` component for centered max-width wrappers.
 
-### File organization
-- One component per file
-- Keep components small and focused
-- Extract reusable logic into custom hooks in `src/hooks/`
-- Static data goes in `src/data/` as plain JS objects
-- Constants and helper functions in `src/utils/`
-
-### Accessibility
-- Use semantic HTML (`<nav>`, `<main>`, `<article>`, `<section>`, `<button>`)
-- All images must have meaningful `alt` text
-- Interactive elements must be keyboard-accessible
-- Color contrast should meet WCAG AA standards
-- Social/external links should have descriptive `aria-label` attributes
-
-## Known Issues / Work in Progress
-
-### 📝 Placeholder data (all client-specific)
-Files in `src/data/` (`artists.js`, `portfolio.js`, `services.js`, `faq.js`) contain placeholder data that must be replaced with real client content before launch. Keep the data shape intact when replacing.
-
-`src/utils/constants.js` also contains placeholders for `CONTACT.whatsapp`, `CONTACT.phone`, and `CONTACT.instagram` that must be updated per client.
-
-### 🔧 Form endpoint placeholder
-`src/pages/Contact.jsx` uses a Formspree form with a placeholder endpoint (`formspree.io/f/TUOID`). This must be replaced with a real Formspree endpoint for each client.
-
-### 🎨 No custom fonts
-The site currently uses `system-ui` only. Adding a distinctive Google Font would improve brand identity. Planned improvement — not blocking.
-
-### 🔒 Missing GDPR cookie banner
-Required by EU law. Not yet implemented. Planned for Phase 2.
-
-### 🔍 Missing SEO essentials
-`sitemap.xml`, `robots.txt`, custom favicon, and Open Graph meta tags are not yet configured. Planned for Phase 2.
+### Commits
+Conventional Commits: `feat:`, `fix:`, `refactor:`, `style:`, `docs:`, `chore:`
+Example: `feat(portfolio): add lightbox for fullscreen image viewing`
 
 ## What to Avoid
 
-- Do NOT add **TypeScript** (project is pure JS)
-- Do NOT add **CSS-in-JS libraries** (styled-components, emotion)
-- Do NOT add **state management libraries** (Redux, Zustand) — React's built-in state is sufficient
-- Do NOT add **UI component libraries** (Material UI, Ant Design, Chakra, shadcn)
-- Do NOT add a `tailwind.config.js` file — we use Tailwind v4 CSS-first config
-- Do NOT introduce **breaking changes to routing** without approval
-- Do NOT replace **placeholder data** without confirming with the user
-- Do NOT add **new dependencies** without justification
-- Do NOT use **inline SVGs** for icons — use `lucide-react` or `react-icons` per the Icon Policy
-- Do NOT add a **universal CSS reset** (`* { margin: 0; padding: 0; }`) — Tailwind v4 Preflight handles this, and adding one breaks `mx-auto` centering (see Historical Notes)
+- No TypeScript, CSS-in-JS, state management libs, UI component libs
+- No `tailwind.config.js` — Tailwind v4 CSS-first config only
+- No breaking route changes without approval
+- No inline SVGs for icons — use lucide-react or react-icons
+- No universal CSS reset — Tailwind Preflight handles it
+- No hardcoded hex colors in components — use Tailwind classes
+- No Brand.jpg as site visual — it contains event text, used only as color reference
+- No new dependencies without justification
 
 ## Historical Notes
 
-These are decisions and lessons learned from past sessions. Keep them in mind to avoid regressions.
-
-### CSS reset universal selector incident (April 2026)
-A global `* { box-sizing: border-box; margin: 0; padding: 0; }` rule in `src/index.css` was silently breaking `mx-auto` centering across the entire site because it overrode Tailwind v4's utility classes. The fix was to remove the universal selector entirely — Tailwind v4 Preflight already handles CSS reset correctly. **Never re-add a universal selector reset to this project.**
+### CSS reset breaks centering (April 2026)
+Universal `* { margin: 0 }` overrides Tailwind's `mx-auto`. Never re-add.
 
 ### Lucide removed brand icons in v1.0 (2025)
-Lucide v1.0 removed brand icons (Instagram, Facebook, Twitter, WhatsApp, etc.) for trademark/legal reasons. Any icon import like `Instagram` or `MessageCircle` from `lucide-react` will fail. Use `react-icons/fa` instead (`FaInstagram`, `FaWhatsapp`). See Icon Policy above.
+Use `react-icons/fa` for Instagram, WhatsApp, etc.
 
 ### Google Translate auto-translates nav labels
-When testing in a regular Chrome browser, Google Translate may automatically translate Italian nav labels (e.g., "Home" → "Casa", "Servizi" → "Salvezza"). This is a browser-side translation, NOT a bug in the code. Always test in incognito mode to see the actual content.
+Test in incognito to see actual content.
 
-## Working with the Codebase
+### OpenCode Big Pickle unreliable (April 2026)
+Failed on multi-file refactoring: wrong colors, truncated code. Use Claude Code (CLI) instead.
 
-### When making changes
-1. **Read related files first** to understand context before modifying
-2. **Match the existing style** — look at neighboring components for patterns
-3. **Propose the approach before implementing** for non-trivial changes
-4. **Show before/after** when modifying existing code
-5. **Don't reformat unrelated code** — keep diffs minimal and focused
-6. **Test in incognito mode** to avoid browser extension interference
+### Lighthouse localhost vs production (April 2026)
+Dev server scores are artificially low. Always test on Vercel production URL.
 
-### Commit messages
-Use Conventional Commits format:
-- `feat:` for new features
-- `fix:` for bug fixes
-- `refactor:` for code restructuring without behavior change
-- `style:` for formatting/CSS-only changes
-- `docs:` for documentation
-- `chore:` for tooling/dependencies
+### SPA + social crawlers = invisible OG tags
+Crawlers don't execute JS. Static fallback OG tags in `index.html` solve this for the home page.
 
-Example: `fix: portfolio grid alignment on 2xl screens`
+### Fixed navbar covers anchor targets
+Add `scroll-mt-24` to target elements + `setTimeout(100ms)` in scroll handler.
 
 ## Communication Style
 
-- **Respond in Italian** if the user writes in Italian (the user is Italian)
-- Be **concise and direct**, but explain reasoning for non-trivial decisions
-- When proposing changes, **show the "before" and "after"**
-- If uncertain about design choices, **ASK before implementing**
-- Use **technical Italian terms** where appropriate
-- When listing options, present **trade-offs** clearly
-- Avoid unnecessary preamble — get to the point
+- Respond in Italian if user writes in Italian
+- Concise and direct, explain reasoning for non-trivial decisions
+- Show before/after when modifying code
+- Ask before implementing uncertain design choices
+- Present trade-offs clearly
