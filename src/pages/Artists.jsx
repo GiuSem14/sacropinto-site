@@ -1,9 +1,10 @@
-﻿import { Helmet } from "react-helmet-async"
+import { Helmet } from "react-helmet-async"
 import { FaInstagram } from "react-icons/fa"
 import Container from "../components/layout/Container"
 import { artistsData } from "../data/artists"
 import { buildMeta } from "../utils/seo"
 import Button from "../components/ui/Button"
+import sfondoBg from "../assets/Sfondo.JPG"
 
 export default function Artists() {
   const meta = buildMeta({
@@ -36,16 +37,24 @@ export default function Artists() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
-      <section className="py-24 bg-black min-h-screen">
+      {/* Header con sfondo marmo */}
+      <section className="relative overflow-hidden bg-black py-24">
+        <div className="absolute inset-0" style={{ backgroundImage: `url(${sfondoBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div className="absolute inset-0 bg-black/70" />
         <Container>
-
-          <div className="max-w-2xl mx-auto text-center mb-16">
+          <div className="relative z-10 max-w-2xl mx-auto text-center">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Chi siamo</p>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Gli artisti</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
               Dietro ogni tatuaggio c'è una persona. Conosci chi lavora in Sacropinto, i loro stili e la loro storia.
             </p>
           </div>
+        </Container>
+      </section>
+
+      {/* Contenuto */}
+      <section className="bg-black pt-12 pb-24">
+        <Container>
 
           <div className="flex flex-col gap-16">
             {artistsData.map((artist) => (

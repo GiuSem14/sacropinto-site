@@ -1,8 +1,9 @@
-﻿import { Helmet } from "react-helmet-async"
+import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
 import { servicesData } from "../data/services"
 import { buildMeta } from "../utils/seo"
 import Button from "../components/ui/Button"
+import sfondoBg from "../assets/Sfondo.JPG"
 
 export default function Services() {
   const meta = buildMeta({
@@ -35,16 +36,24 @@ export default function Services() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
-      <section className="py-24 bg-black min-h-screen">
+      {/* Header con sfondo marmo */}
+      <section className="relative overflow-hidden bg-black py-24">
+        <div className="absolute inset-0" style={{ backgroundImage: `url(${sfondoBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div className="absolute inset-0 bg-black/70" />
         <Container>
-
-          <div className="max-w-2xl mx-auto text-center mb-16">
+          <div className="relative z-10 max-w-2xl mx-auto text-center">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Cosa facciamo</p>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Servizi</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
               Ogni progetto è unico. Che tu abbia un'idea precisa o un vago senso di quello che vuoi, siamo qui per trasformarla in qualcosa di permanente e personale.
             </p>
           </div>
+        </Container>
+      </section>
+
+      {/* Contenuto */}
+      <section className="bg-black pt-12 pb-24">
+        <Container>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-800">
             {servicesData.map((service) => (

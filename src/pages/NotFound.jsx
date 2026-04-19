@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import Container from "../components/layout/Container"
 import { buildTitle } from "../utils/seo"
 import Button from "../components/ui/Button"
+import sfondoBg from "../assets/Sfondo.JPG"
 
 export default function NotFound() {
   return (
@@ -13,9 +14,11 @@ export default function NotFound() {
         <meta name="robots" content="noindex" />
       </Helmet>
 
-      <section className="py-24 bg-black min-h-screen flex items-center">
+      <section className="relative overflow-hidden bg-black py-24 min-h-screen flex items-center">
+        <div className="absolute inset-0" style={{ backgroundImage: `url(${sfondoBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
+        <div className="absolute inset-0 bg-black/70" />
         <Container>
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="relative z-10 max-w-2xl mx-auto text-center">
 
             {/* Big 404 */}
             <p className="text-gray-800 text-[8rem] md:text-[12rem] font-bold leading-none tracking-tighter mb-4">
