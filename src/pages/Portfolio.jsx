@@ -1,5 +1,7 @@
-﻿import { useState } from "react"
+import { useState } from "react"
 import { Helmet } from "react-helmet-async"
+import Lightbox from "yet-another-react-lightbox"
+import "yet-another-react-lightbox/styles.css"
 import Container from "../components/layout/Container"
 import { portfolioData, portfolioStyles } from "../data/portfolio"
 import { buildMeta } from "../utils/seo"
@@ -13,6 +15,7 @@ export default function Portfolio() {
   })
 
   const [activeStyle, setActiveStyle] = useState("Tutti")
+  const [lightboxIndex, setLightboxIndex] = useState(-1)
 
   const filtered = activeStyle === "Tutti"
     ? portfolioData
@@ -72,8 +75,12 @@ export default function Portfolio() {
 
           {/* Griglia */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            {filtered.map((item) => (
-              <div key={item.id} className="aspect-square bg-gray-900 relative overflow-hidden group">
+            {filtered.map((item, index) => (
+              <div
+                key={item.id}
+                className="aspect-square bg-gray-900 relative overflow-hidden group cursor-pointer"
+                onClick={() => setLightboxIndex(index)}
+              >
                 {item.image ? (
                   <img
                     src={item.image}
@@ -113,6 +120,13 @@ export default function Portfolio() {
 
         </Container>
       </section>
+
+      <Lightbox
+        open={lightboxIndex >= 0}
+        close={() => setLightboxIndex(-1)}
+        index={lightboxIndex}
+        slides={filtered.map((item) => ({ src: item.image, alt: item.alt }))}
+      />
     </>
   )
 }
