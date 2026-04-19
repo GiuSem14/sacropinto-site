@@ -45,7 +45,7 @@ export default function Portfolio() {
       <section className="py-24 bg-black min-h-screen">
         <Container>
 
-          <div className="max-w-2xl mb-12">
+          <div className="max-w-2xl mx-auto text-center mb-12">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">I nostri lavori</p>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Portfolio</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
@@ -54,7 +54,7 @@ export default function Portfolio() {
           </div>
 
           {/* Filtri */}
-          <div className="flex flex-wrap gap-2 mb-12">
+          <div className="flex flex-wrap gap-2 justify-center mb-12">
             {portfolioStyles.map((style) => (
               <button
                 key={style}
@@ -108,7 +108,7 @@ export default function Portfolio() {
 
           <div className="mt-16 text-center">
             <p className="text-gray-400 mb-6">Ti piace quello che vedi? Parliamo del tuo progetto.</p>
-            <Button href="/contatti" variant="primary">Prenota una consulenza</Button>
+            <Button href="/contatti#scrivici" variant="primary">Prenota una consulenza</Button>
           </div>
 
         </Container>

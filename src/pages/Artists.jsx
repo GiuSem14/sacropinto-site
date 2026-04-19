@@ -39,7 +39,7 @@ export default function Artists() {
       <section className="py-24 bg-black min-h-screen">
         <Container>
 
-          <div className="max-w-2xl mb-16">
+          <div className="max-w-2xl mx-auto text-center mb-16">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Chi siamo</p>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Gli artisti</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
@@ -99,7 +99,7 @@ export default function Artists() {
 
           <div className="mt-20 border-t border-gray-800 pt-16 text-center">
             <p className="text-gray-400 text-lg mb-6">Vuoi lavorare con noi?</p>
-            <Button href="/contatti" variant="primary">Contattaci</Button>
+            <Button href="/contatti#scrivici" variant="primary">Contattaci</Button>
           </div>
 
         </Container>

@@ -59,7 +59,7 @@ export default function Faq() {
 
       <section className="py-24 bg-black min-h-screen">
         <Container>
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto text-center">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Hai dei dubbi?</p>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Domande frequenti</h1>
             <p className="text-gray-400 mb-12 text-lg">

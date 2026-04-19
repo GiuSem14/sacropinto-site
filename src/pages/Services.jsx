@@ -38,7 +38,7 @@ export default function Services() {
       <section className="py-24 bg-black min-h-screen">
         <Container>
 
-          <div className="max-w-2xl mb-16">
+          <div className="max-w-2xl mx-auto text-center mb-16">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Cosa facciamo</p>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Servizi</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
@@ -59,7 +59,7 @@ export default function Services() {
             <p className="text-gray-400 text-lg mb-6">
               Non sai da dove iniziare? Contattaci per una consulenza gratuita.
             </p>
-            <Button href="/contatti" variant="primary">Prenota una consulenza</Button>
+            <Button href="/contatti#scrivici" variant="primary">Prenota una consulenza</Button>
           </div>
 
         </Container>
