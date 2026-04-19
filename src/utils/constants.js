@@ -11,9 +11,9 @@ export const ANALYTICS_GA4_ID = "G-PLACEHOLDER"
 export const ANALYTICS_PLAUSIBLE_DOMAIN = "sacropinto.it"
 
 export const CONTACT = {
-  address: "Piazza Armerina, Enna, Sicilia",
+  address: "Via Chiarandà 24, Piazza Armerina, Enna, Sicilia",
   phone: "+39 000 000 0000",
-  whatsapp: "+39 000 000 0000",
+  whatsapp: "+39 329 9090569",
   email: "info@sacropinto.it",
   instagram: "https://www.instagram.com/sacropinto",
   googleMapsUrl: "https://maps.google.com/?q=Piazza+Armerina",
