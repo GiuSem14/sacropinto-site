@@ -38,7 +38,7 @@ export default function Contact() {
         <Container>
 
           {/* 1. Header */}
-          <div className="max-w-2xl mb-16">
+          <div className="max-w-2xl mx-auto text-center mb-16">
             <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Vieni a trovarci</p>
             <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Contatti</h1>
             <p className="text-gray-400 text-lg leading-relaxed">
@@ -90,7 +90,7 @@ export default function Contact() {
           </div>
 
           {/* 4. Form */}
-          <div className="max-w-xl mx-auto mt-20">
+          <div id="scrivici" className="max-w-xl mx-auto mt-20 scroll-mt-24">
             <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Scrivici</p>
             <form action="https://formspree.io/f/xbdqgrjr" method="POST" className="flex flex-col gap-5">
               <div>

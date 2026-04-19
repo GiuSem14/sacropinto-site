@@ -15,7 +15,7 @@ export default function ContactCTA() {
             Raccontacela. Ogni tatuaggio parte da una conversazione. Contattaci per una consulenza gratuita, senza impegno.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button href="/contatti" variant="primary">Prenota una consulenza</Button>
+            <Button href="/contatti#scrivici" variant="primary">Prenota una consulenza</Button>
             <a href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="inline-block border border-gray-600 text-gray-400 hover:border-white hover:text-white transition-colors duration-200 px-6 py-3 text-sm uppercase tracking-wide">Scrivici su WhatsApp</a>
           </div>
         </div>

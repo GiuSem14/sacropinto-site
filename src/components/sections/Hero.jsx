@@ -36,7 +36,7 @@ export default function Hero() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button href="/contatti" variant="primary">
+          <Button href="/contatti#scrivici" variant="primary">
             Prenota una consulenza
           </Button>
           <Button href="/portfolio" variant="outline">
