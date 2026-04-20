@@ -1,4 +1,3 @@
-import { useRef, useState, useEffect } from "react"
 import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
 import useFadeIn from "../hooks/useFadeIn"
@@ -8,55 +7,6 @@ function FadeInSection({ children }) {
   return (
     <div ref={ref} className="opacity-0 translate-y-16 transition-all duration-1000 ease-out">
       {children}
-    </div>
-  )
-}
-function MapWithOverlay({ src }) {
-  const overlayRef = useRef(null)
-  const [showHint, setShowHint] = useState(false)
-  const timerRef = useRef(null)
-
-  useEffect(() => {
-    const el = overlayRef.current
-    if (!el) return
-    const handleWheel = (e) => {
-      if (e.ctrlKey) return
-      e.preventDefault()
-      setShowHint(true)
-      clearTimeout(timerRef.current)
-      timerRef.current = setTimeout(() => setShowHint(false), 1500)
-    }
-    el.addEventListener("wheel", handleWheel, { passive: false })
-    return () => {
-      el.removeEventListener("wheel", handleWheel)
-      clearTimeout(timerRef.current)
-    }
-  }, [])
-
-  return (
-    <div className="relative w-full aspect-[16/9] md:aspect-[21/9] border border-gray-800 overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
-      <iframe
-        src={src}
-        width="100%"
-        height="100%"
-        style={{ border: 0 }}
-        allowFullScreen
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        title="Mappa di Sacropinto Tattoo Studio"
-      />
-      <div
-        ref={overlayRef}
-        className="absolute inset-0"
-        style={{ pointerEvents: showHint ? "auto" : "auto" }}
-      />
-      {showHint && (
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <span style={{ background: "rgba(0,0,0,0.6)", color: "#fff", fontSize: "0.8rem", borderRadius: "6px", padding: "8px 16px" }}>
-            Usa Ctrl + rotella per navigare nella mappa
-          </span>
-        </div>
-      )}
     </div>
   )
 }
@@ -200,7 +150,18 @@ export default function Contact() {
           {GOOGLE_MAPS_EMBED_URL && (
             <div className="mt-20">
               <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Dove siamo</p>
-              <MapWithOverlay src={GOOGLE_MAPS_EMBED_URL} />
+              <div className="w-full aspect-[16/9] md:aspect-[21/9] border border-gray-800 overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
+                <iframe
+                  src={GOOGLE_MAPS_EMBED_URL}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Mappa di Sacropinto Tattoo Studio"
+                />
+              </div>
             </div>
           )}
           </FadeInSection>
