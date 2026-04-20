@@ -73,7 +73,16 @@ export default function Contact() {
             </div>
             <div className="bg-gray-900 p-6 border border-gray-800">
               <p className="text-gray-500 uppercase tracking-widest text-xs mb-3">WhatsApp</p>
-              <a href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">{CONTACT.whatsapp}</a>
+              <div className="flex flex-col gap-3">
+                <div>
+                  <p className="text-gray-500 text-xs mb-1">Filippo Farina</p>
+                  <a href={`https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">{CONTACT.whatsapp}</a>
+                </div>
+                <div>
+                  <p className="text-gray-500 text-xs mb-1">Filippo Guelfo</p>
+                  <span className="text-white">+39 XXX XXX XXXX</span>
+                </div>
+              </div>
             </div>
             <div className="bg-gray-900 p-6 border border-gray-800">
               <p className="text-gray-500 uppercase tracking-widest text-xs mb-3">Email</p>
@@ -113,7 +122,7 @@ export default function Contact() {
 
           {/* 4. Form */}
           <FadeInSection>
-          <div id="scrivici" className="max-w-xl mx-auto mt-20 scroll-mt-24">
+          <div id="scrivici" className="max-w-xl mx-auto mt-20 scroll-mt-32">
             <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Scrivici</p>
             <form action="https://formspree.io/f/xbdqgrjr" method="POST" className="flex flex-col gap-5">
               <div>

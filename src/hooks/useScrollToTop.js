@@ -8,7 +8,10 @@ export default function useScrollToTop() {
     if (location.hash) {
       setTimeout(() => {
         const el = document.getElementById(location.hash.slice(1))
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY - 128
+          window.scrollTo({ top, behavior: "smooth" })
+        }
       }, 100)
     } else {
       window.scrollTo(0, 0)
