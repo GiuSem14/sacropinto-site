@@ -6,13 +6,17 @@ export default function useScrollToTop() {
 
   useEffect(() => {
     if (location.hash) {
-      setTimeout(() => {
-        const el = document.getElementById(location.hash.slice(1))
+      const id = location.hash.slice(1)
+      const tryScroll = (attempts = 0) => {
+        const el = document.getElementById(id)
         if (el) {
           const top = el.getBoundingClientRect().top + window.scrollY - 128
           window.scrollTo({ top, behavior: "smooth" })
+        } else if (attempts < 10) {
+          setTimeout(() => tryScroll(attempts + 1), 100)
         }
-      }, 100)
+      }
+      setTimeout(() => tryScroll(), 100)
     } else {
       window.scrollTo(0, 0)
     }
