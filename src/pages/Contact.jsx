@@ -1,5 +1,15 @@
 import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
+import useFadeIn from "../hooks/useFadeIn"
+
+function FadeInSection({ children }) {
+  const ref = useFadeIn()
+  return (
+    <div ref={ref} className="opacity-0 translate-y-16 transition-all duration-1000 ease-out">
+      {children}
+    </div>
+  )
+}
 import { buildMeta } from "../utils/seo"
 import { CONTACT, HOURS, GOOGLE_MAPS_EMBED_URL } from "../utils/constants"
 import sfondoBg from "../assets/Sfondo.JPG"
@@ -55,6 +65,7 @@ export default function Contact() {
         <Container>
 
           {/* 2. Contact info cards */}
+          <FadeInSection>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             <div className="bg-gray-900 p-6 border border-gray-800">
               <p className="text-gray-500 uppercase tracking-widest text-xs mb-3">Indirizzo</p>
@@ -73,8 +84,10 @@ export default function Contact() {
               <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">@sacropinto</a>
             </div>
           </div>
+          </FadeInSection>
 
           {/* 3. Hours */}
+          <FadeInSection>
           <div className="mb-20">
             <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Orari</p>
             {/* Desktop: 7 columns */}
@@ -96,8 +109,10 @@ export default function Contact() {
               ))}
             </ul>
           </div>
+          </FadeInSection>
 
           {/* 4. Form */}
+          <FadeInSection>
           <div id="scrivici" className="max-w-xl mx-auto mt-20 scroll-mt-24">
             <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Scrivici</p>
             <form action="https://formspree.io/f/xbdqgrjr" method="POST" className="flex flex-col gap-5">
@@ -118,8 +133,10 @@ export default function Contact() {
               </button>
             </form>
           </div>
+          </FadeInSection>
 
           {/* 5. Map */}
+          <FadeInSection>
           {GOOGLE_MAPS_EMBED_URL && (
             <div className="mt-20">
               <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Dove siamo</p>
@@ -137,6 +154,7 @@ export default function Contact() {
               </div>
             </div>
           )}
+          </FadeInSection>
 
         </Container>
       </section>

@@ -1,5 +1,15 @@
 import { Helmet } from "react-helmet-async"
 import Container from "../components/layout/Container"
+import useFadeIn from "../hooks/useFadeIn"
+
+function FadeInSection({ children }) {
+  const ref = useFadeIn()
+  return (
+    <div ref={ref} className="opacity-0 translate-y-16 transition-all duration-1000 ease-out">
+      {children}
+    </div>
+  )
+}
 import { servicesData } from "../data/services"
 import { buildMeta } from "../utils/seo"
 import Button from "../components/ui/Button"
@@ -54,7 +64,7 @@ export default function Services() {
       {/* Contenuto */}
       <section className="bg-black pt-12 pb-24">
         <Container>
-
+          <FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-gray-800">
             {servicesData.map((service) => (
               <div key={service.id} className="bg-black p-8 hover:bg-gray-950 transition-colors duration-200">
@@ -70,6 +80,7 @@ export default function Services() {
             </p>
             <Button href="/contatti#scrivici" variant="primary">Prenota una consulenza</Button>
           </div>
+          </FadeInSection>
 
         </Container>
       </section>

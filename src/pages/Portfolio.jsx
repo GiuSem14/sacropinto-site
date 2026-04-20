@@ -1,5 +1,15 @@
 import { useState } from "react"
 import { Helmet } from "react-helmet-async"
+import useFadeIn from "../hooks/useFadeIn"
+
+function FadeInSection({ children }) {
+  const ref = useFadeIn()
+  return (
+    <div ref={ref} className="opacity-0 translate-y-16 transition-all duration-1000 ease-out">
+      {children}
+    </div>
+  )
+}
 import Lightbox from "yet-another-react-lightbox"
 import "yet-another-react-lightbox/styles.css"
 import Container from "../components/layout/Container"
@@ -64,6 +74,7 @@ export default function Portfolio() {
       {/* Contenuto */}
       <section className="bg-black pt-12 pb-24">
         <Container>
+        <FadeInSection>
 
           {/* Filtri */}
           <div className="flex flex-wrap gap-2 justify-center mb-12">
@@ -126,6 +137,7 @@ export default function Portfolio() {
             <p className="text-gray-400 mb-6">Ti piace quello che vedi? Parliamo del tuo progetto.</p>
             <Button href="/contatti#scrivici" variant="primary">Prenota una consulenza</Button>
           </div>
+        </FadeInSection>
 
         </Container>
       </section>

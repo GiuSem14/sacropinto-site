@@ -1,5 +1,15 @@
 import { Helmet } from "react-helmet-async"
 import { FaInstagram } from "react-icons/fa"
+import useFadeIn from "../hooks/useFadeIn"
+
+function FadeInSection({ children }) {
+  const ref = useFadeIn()
+  return (
+    <div ref={ref} className="opacity-0 translate-y-16 transition-all duration-1000 ease-out">
+      {children}
+    </div>
+  )
+}
 import Container from "../components/layout/Container"
 import { artistsData } from "../data/artists"
 import { buildMeta } from "../utils/seo"
@@ -55,7 +65,7 @@ export default function Artists() {
       {/* Contenuto */}
       <section className="bg-black pt-12 pb-24">
         <Container>
-
+          <FadeInSection>
           <div className="flex flex-col gap-16">
             {artistsData.map((artist) => (
               <div key={artist.id} className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start border-t border-gray-800 pt-12">
@@ -110,6 +120,7 @@ export default function Artists() {
             <p className="text-gray-400 text-lg mb-6">Vuoi lavorare con noi?</p>
             <Button href="/contatti#scrivici" variant="primary">Contattaci</Button>
           </div>
+          </FadeInSection>
 
         </Container>
       </section>

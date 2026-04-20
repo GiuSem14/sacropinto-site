@@ -3,6 +3,16 @@ import Hero from "../components/sections/Hero"
 import HomePortfolioPreview from "../components/sections/HomePortfolioPreview"
 import ContactCTA from "../components/sections/ContactCTA"
 import { buildMeta } from "../utils/seo"
+import useFadeIn from "../hooks/useFadeIn"
+
+function FadeInSection({ children }) {
+  const ref = useFadeIn()
+  return (
+    <div ref={ref} className="opacity-0 translate-y-16 transition-all duration-1000 ease-out">
+      {children}
+    </div>
+  )
+}
 
 export default function Home() {
   const meta = buildMeta({
@@ -34,8 +44,8 @@ export default function Home() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
       <Hero />
-      <HomePortfolioPreview />
-      <ContactCTA />
+      <FadeInSection><HomePortfolioPreview /></FadeInSection>
+      <FadeInSection><ContactCTA /></FadeInSection>
     </>
   )
 }
