@@ -4,7 +4,7 @@ import artista2 from "../assets/Artista2.jpg"
 export const artistsData = [
   {
     id: 1,
-    name: "Filippo",
+    name: "Filippo Farina",
     role: "Tattoo Artist & Founder",
     bio: "Fondatore di Sacropinto. Ogni tatuaggio nasce da un dialogo con il cliente, per trasformare idee in arte permanente sulla pelle.",
     styles: ["Blackwork", "Realistico", "Neo-Traditional"],
@@ -15,7 +15,7 @@ export const artistsData = [
   },
   {
     id: 2,
-    name: "Filippo",
+    name: "Filippo Guelfo",
     role: "Tattoo Artist & Founder",
     bio: "Fondatore di Sacropinto. Ogni tatuaggio nasce da un dialogo con il cliente, per trasformare idee in arte permanente sulla pelle.",
     styles: ["Blackwork", "Realistico", "Neo-Traditional"],
