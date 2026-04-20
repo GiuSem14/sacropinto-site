@@ -150,7 +150,7 @@ export default function Contact() {
           {GOOGLE_MAPS_EMBED_URL && (
             <div className="mt-20">
               <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Dove siamo</p>
-              <div className="w-full aspect-[16/9] md:aspect-[21/9] border border-gray-800 overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
+              <div className="w-full aspect-[16/9] md:aspect-[21/9] border border-gray-800 overflow-hidden">
                 <iframe
                   src={GOOGLE_MAPS_EMBED_URL}
                   width="100%"
