@@ -15,11 +15,12 @@ export default function Navbar() {
       <div className="px-8">
         <div className="relative flex items-center h-16">
           {/* Logo - estrema sinistra */}
-          <Link
-            to="/"
-            className="text-white font-bold text-xl tracking-widest uppercase"
-          >
-            {SITE_NAME}
+          <Link to="/" className="flex items-center">
+            <img
+              src="/logo-sacropinto.png"
+              alt="Sacropinto Tattoo Studio"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop nav - centrato */}

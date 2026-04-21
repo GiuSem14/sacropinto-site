@@ -27,9 +27,12 @@ export default function Hero() {
           Tattoo Studio — Piazza Armerina, Sicilia
         </p>
 
-        <h1 className="font-display text-6xl md:text-8xl font-bold tracking-tight text-white mb-6 leading-none">
-          SACROPINTO
-        </h1>
+        <img
+          src="/logo-sacropinto.png"
+          alt="Sacropinto Tattoo Studio"
+          className="w-auto mx-auto object-contain mb-6"
+          style={{ maxHeight: "260px" }}
+        />
 
         <p className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
           Arte sulla pelle. Ogni tatuaggio è un progetto unico, realizzato con cura artigianale nel cuore della Sicilia.
