@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async"
-import { FaInstagram } from "react-icons/fa"
+import { FaInstagram, FaWhatsapp } from "react-icons/fa"
 import useFadeIn from "../hooks/useFadeIn"
 
 function FadeInSection({ children }) {
@@ -100,16 +100,28 @@ export default function Artists() {
                     ))}
                   </div>
 
-                  <a
-                    href={artist.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Instagram di ${artist.name}`}
-                    className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors uppercase tracking-wide"
-                  >
-                    <FaInstagram size={16} />
-                    Instagram
-                  </a>
+                  <div className="flex flex-wrap gap-6">
+                    <a
+                      href={artist.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Instagram di ${artist.name}`}
+                      className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors uppercase tracking-wide"
+                    >
+                      <FaInstagram size={16} />
+                      Instagram
+                    </a>
+                    <a
+                      href={`https://wa.me/393929090569?text=${encodeURIComponent(`Ciao! Vorrei prenotare una sessione con ${artist.name}. Potete dirmi le vostre disponibilità?`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Prenota con ${artist.name} su WhatsApp`}
+                      className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors uppercase tracking-wide"
+                    >
+                      <FaWhatsapp size={16} />
+                      Prenota con {artist.name}
+                    </a>
+                  </div>
                 </div>
 
               </div>

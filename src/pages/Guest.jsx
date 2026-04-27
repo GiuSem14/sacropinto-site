@@ -122,11 +122,22 @@ export default function Guest() {
                       )}
                       {guest.date && (
                         <div className="flex flex-wrap gap-2 mb-5">
-                          {guest.date.split(",").map((d, j) => (
-                            <span key={j} className="border border-gray-700 text-gray-400 text-xs uppercase tracking-widest px-3 py-1">
-                              {d.trim()}
-                            </span>
-                          ))}
+                          {guest.date.split(",").map((d, j) => {
+                            const data = d.trim()
+                            const messaggio = encodeURIComponent(`Ciao! Vorrei prenotare una sessione con ${guest.nome} il ${data}. È ancora disponibile?`)
+                            const whatsappUrl = `https://wa.me/393929090569?text=${messaggio}`
+                            return (
+                              <a
+                                key={j}
+                                href={whatsappUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="border border-gray-700 text-gray-400 text-xs uppercase tracking-widest px-3 py-1 hover:border-white hover:text-white transition-colors duration-200 cursor-pointer"
+                              >
+                                {data}
+                              </a>
+                            )
+                          })}
                         </div>
                       )}
                       {guest.instagram && (
