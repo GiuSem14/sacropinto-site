@@ -2,7 +2,18 @@ import { FaWhatsapp } from "react-icons/fa"
 import { CONTACT } from "../../utils/constants"
 
 const whatsappNumber = CONTACT.whatsapp.replace(/\D/g, "")
-const whatsappUrl = `https://wa.me/${whatsappNumber}`
+const messaggio = encodeURIComponent(
+  "Ciao! Vi contatto dal sito sacropinto.it\n\n" +
+  "👤 Nome: \n" +
+  "👤 Cognome: \n" +
+  "🎂 Età: \n" +
+  "📍 Zona del corpo: \n" +
+  "🎨 Stile preferito: \n" +
+  "📏 Dimensione indicativa: \n" +
+  "💬 Descrizione del tatuaggio: \n\n" +
+  "Grazie!"
+)
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${messaggio}`
 
 export default function FloatingWhatsApp() {
   return (
