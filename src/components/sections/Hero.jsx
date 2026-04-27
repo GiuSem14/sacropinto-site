@@ -45,6 +45,9 @@ export default function Hero() {
           <Button href="/portfolio" variant="outline">
             Scopri il portfolio
           </Button>
+          <Button href="https://calendly.com/seminato-giuseppe98/30min" variant="outline" target="_blank">
+            Prenota online
+          </Button>
         </div>
 
       </div>

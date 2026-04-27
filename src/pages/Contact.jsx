@@ -12,6 +12,7 @@ function FadeInSection({ children }) {
 }
 
 import { buildMeta } from "../utils/seo"
+import Button from "../components/ui/Button"
 import { CONTACT, HOURS, GOOGLE_MAPS_EMBED_URL } from "../utils/constants"
 import sfondoBg from "../assets/Sfondo.JPG"
 
@@ -121,7 +122,20 @@ export default function Contact() {
           </div>
           </FadeInSection>
 
-          {/* 4. Form */}
+          {/* 4. Calendly */}
+          <FadeInSection>
+          <div className="max-w-xl mx-auto mt-20 text-center">
+            <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Prenota una consulenza</p>
+            <p className="text-gray-400 mb-8 leading-relaxed">
+              Scegli data e orario direttamente dal calendario. Riceverai una conferma automatica via email.
+            </p>
+            <Button href="https://calendly.com/seminato-giuseppe98/30min" variant="primary" target="_blank">
+              Prenota ora
+            </Button>
+          </div>
+          </FadeInSection>
+
+          {/* 5. Form */}
           <FadeInSection>
           <div id="scrivici" className="max-w-xl mx-auto mt-20 scroll-mt-32">
             <p className="text-gray-500 uppercase tracking-widest text-xs mb-6">Scrivici</p>
