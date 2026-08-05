@@ -1,16 +1,26 @@
-# React + Vite
+Sacropinto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website for a tattoo studio in Sicily, Italy. Built and deployed for a real client.
 
-Currently, two official plugins are available:
+Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+React · Vite · Tailwind CSS · React Router · deployed on Vercel
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+What it does
+Portfolio gallery — the studio's work presented with a lightbox viewer, since the portfolio is the sales pitch for a tattoo studio.
+Artists and services — content kept in plain data modules under src/data/ (artists.js, services.js, portfolio.js, faq.js), so adding an artist or a service is a data edit, not a layout change.
+Pluggable analytics — src/lib/analytics.js sits behind a provider interface with Google Analytics and Plausible implementations, so the tracking tool can be swapped without touching the components that fire events.
+Cookie consent — a useCookieConsent hook gates analytics: nothing loads before the visitor agrees.
+Direct contact — floating WhatsApp button, the channel this audience uses.
+Structure
+src/components/ui/          reusable primitives (Button, Card, Badge, SectionTitle)
+src/components/sections/    page sections (Hero, Services, Artists, Portfolio, FAQ, CTA)
+src/components/layout/      Navbar, Footer, Container
+src/components/cookie/      banner and preferences
+src/hooks/                  useCookieConsent, useFadeIn, useScrollToTop
+src/data/                   content as data
+src/lib/                    analytics abstraction and providers
+Running locally
+bash
+npm install
+npm run dev
