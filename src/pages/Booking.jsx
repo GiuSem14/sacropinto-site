@@ -356,7 +356,7 @@ export default function Booking() {
                   disabled={!canContinue}
                   className="inline-flex items-center gap-3 min-h-12 px-8 bg-white text-black font-semibold transition-colors hover:bg-verde disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed"
                 >
-                  {current === "contatti" ? (<><FaWhatsapp size={20} aria-hidden="true" /> Invia su WhatsApp</>) : "Continua"}
+                  {current === "contatti" ? "Invia la richiesta" : "Continua"}
                 </button>
               </div>
             </form>
