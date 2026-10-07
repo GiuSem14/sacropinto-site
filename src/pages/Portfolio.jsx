@@ -21,7 +21,7 @@ import sfondoBg from "../assets/Sfondo.JPG"
 export default function Portfolio() {
   const meta = buildMeta({
     title: "Portfolio",
-    description: "Scopri i tatuaggi realizzati da Sacropinto a Piazza Armerina. Blackwork, realistico, geometrico, linework e molto altro.",
+    description: "Scopri i tatuaggi realizzati da Sacropinto a Piazza Armerina. Anime, neo-tradizionale, fine line e dotwork.",
     path: "/portfolio",
   })
 
