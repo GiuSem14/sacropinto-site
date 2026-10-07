@@ -18,6 +18,8 @@ import CookiePolicy from "./pages/CookiePolicy"
 import NotFound from "./pages/NotFound"
 import Guest from "./pages/Guest"
 import Booking from "./pages/Booking"
+import Aftercare from "./pages/Aftercare"
+import MobileBookingBar from "./components/ui/MobileBookingBar"
 
 function ScrollToTop() {
   useScrollToTop()
@@ -45,12 +47,14 @@ export default function App() {
                 <Route path="/cookie-policy" element={<CookiePolicy />} />
                 <Route path="/guest" element={<Guest />} />
                 <Route path="/prenota" element={<Booking />} />
+                <Route path="/cura" element={<Aftercare />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
             <Footer />
           </div>
           <FloatingWhatsApp />
+          <MobileBookingBar />
           <CookieBanner />
         </CookieConsentProvider>
       </BrowserRouter>
