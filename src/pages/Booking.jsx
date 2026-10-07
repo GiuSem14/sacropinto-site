@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async"
 import { Check } from "lucide-react"
 import { FaWhatsapp } from "react-icons/fa"
 import { buildMeta } from "../utils/seo"
-import { BOOKING_FORM_ENDPOINT, CONTACT } from "../utils/constants"
+import { CONTACT } from "../utils/constants"
 import { requestTypes, styleGuide, bodyZones, sizes } from "../data/studio"
 import { artistsData } from "../data/artists"
 
@@ -20,8 +20,6 @@ const EMPTY = {
   colore: "",
   idea: "",
   nome: "",
-  telefono: "",
-  email: "",
   disponibilita: "",
   eta: false,
   privacy: false,
@@ -79,7 +77,7 @@ function Field({ label, optional, children }) {
 const inputClass =
   "w-full bg-gray-900 border border-gray-700 text-white px-4 py-3 min-h-12 placeholder:text-gray-500 focus:outline-none focus:border-verde transition-colors"
 
-/* ---------- testo della richiesta, usato per email e WhatsApp ---------- */
+/* ---------- testo della richiesta, inviato su WhatsApp ---------- */
 
 function buildSummary(data) {
   const tipo = requestTypes.find((t) => t.id === data.tipo)?.label
@@ -94,8 +92,6 @@ function buildSummary(data) {
     ["Idea", data.idea],
     ["Disponibilità", data.disponibilita],
     ["Nome", data.nome],
-    ["Telefono", data.telefono],
-    ["Email", data.email],
   ]
   return rows.filter(([, value]) => value)
 }
@@ -120,7 +116,7 @@ export default function Booking() {
 
   const [data, setData] = useState(initial)
   const [step, setStep] = useState(0)
-  const [status, setStatus] = useState("idle") // idle | sending | sent | error
+  const [sent, setSent] = useState(false)
 
   const isPiercing = data.tipo === "piercing"
   const steps = isPiercing ? ["tipo", "zona", "idea", "contatti"] : ["tipo", "stile", "zona", "idea", "contatti"]
@@ -137,14 +133,14 @@ export default function Booking() {
     stile: Boolean(data.stile),
     zona: Boolean(data.zona) && (isPiercing || Boolean(data.misura)),
     idea: data.idea.trim().length > 0,
-    contatti: data.nome.trim() && data.telefono.trim() && data.eta && data.privacy,
+    contatti: data.nome.trim() && data.eta && data.privacy,
   }[current]
 
   const summary = buildSummary(data)
   const whatsappText = encodeURIComponent(
-    "Ciao! Vi scrivo dal sito per una richiesta.\n\n" +
+    "Ciao! Vi scrivo dal sito per richiedere un tatuaggio.\n\n" +
       summary.map(([key, value]) => `${key}: ${value}`).join("\n") +
-      "\n\nVi mando qui le foto di riferimento."
+      "\n\nVi allego qui le foto di riferimento."
   )
   const whatsappUrl = `https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}?text=${whatsappText}`
 
@@ -158,23 +154,13 @@ export default function Booking() {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
-  const submit = async (event) => {
+  // L'unico canale è WhatsApp: si apre la chat dello studio con la richiesta già scritta
+  const submit = (event) => {
     event.preventDefault()
     if (!canContinue) return
-    setStatus("sending")
-    try {
-      const response = await fetch(BOOKING_FORM_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          _subject: `Nuova richiesta: ${summary[0]?.[1] ?? "tatuaggio"} — ${data.nome}`,
-          ...Object.fromEntries(summary),
-        }),
-      })
-      setStatus(response.ok ? "sent" : "error")
-    } catch {
-      setStatus("error")
-    }
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer")
+    setSent(true)
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   return (
@@ -201,26 +187,26 @@ export default function Booking() {
         <div className="h-1 bg-gray-900" role="progressbar" aria-valuemin={1} aria-valuemax={steps.length} aria-valuenow={step + 1} aria-label="Avanzamento della richiesta">
           <div
             className="h-full bg-verde origin-left transition-transform duration-700 ease-[var(--ease-out-soft)]"
-            style={{ transform: `scaleX(${status === "sent" ? 1 : progress})` }}
+            style={{ transform: `scaleX(${sent ? 1 : progress})` }}
           />
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 grid lg:grid-cols-[minmax(0,1fr)_340px] gap-14">
-          {status === "sent" ? (
+          {sent ? (
             <div className="step-in max-w-2xl">
               <div className="w-14 h-14 rounded-full bg-verde text-black flex items-center justify-center mb-8">
                 <Check size={28} />
               </div>
-              <h1 className="font-display text-5xl md:text-6xl leading-[1.05] text-white">Richiesta inviata</h1>
+              <h1 className="font-display text-5xl md:text-6xl leading-[1.05] text-white">Ultimo passo su WhatsApp</h1>
               <p className="mt-6 text-lg text-gray-300 leading-relaxed">
-                Grazie {data.nome}. Ti ricontattiamo al numero {data.telefono} per fissare la consulenza gratuita.
+                Grazie {data.nome}. Si è aperta la chat con lo studio e la tua richiesta è già scritta: premi invio su WhatsApp per mandarla.
               </p>
               <p className="mt-4 text-gray-400 leading-relaxed">
-                Se hai foto di riferimento o del punto da tatuare, mandacele su WhatsApp: ci aiutano a prepararci.
+                Nella stessa chat allega le foto di riferimento o del punto da tatuare: ci aiutano a prepararci alla consulenza.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 min-h-12 px-7 bg-white text-black font-semibold hover:bg-verde transition-colors">
-                  <FaWhatsapp size={20} /> Manda le foto su WhatsApp
+                  <FaWhatsapp size={20} /> Riapri WhatsApp
                 </a>
                 <Link to="/cura" className="inline-flex items-center justify-center min-h-12 px-7 border border-gray-600 text-white hover:border-white transition-colors">
                   Leggi come si cura un tatuaggio
@@ -318,24 +304,17 @@ export default function Booking() {
                       </fieldset>
                     )}
                     <p className="text-gray-400 border-l-2 border-verde pl-4">
-                      Hai foto di riferimento? Dopo l'invio puoi mandarcele su WhatsApp con un tocco.
+                      Hai foto di riferimento? Le alleghi direttamente nella chat WhatsApp, alla fine.
                     </p>
                   </div>
                 )}
 
                 {current === "contatti" && (
                   <div className="flex flex-col gap-6">
-                    <h1 className="font-display text-4xl md:text-6xl leading-[1.05] text-white mb-4">Come ti ricontattiamo?</h1>
-                    <div className="grid sm:grid-cols-2 gap-6">
-                      <Field label="Nome">
-                        <input type="text" value={data.nome} onChange={set("nome")} autoComplete="given-name" required className={inputClass} />
-                      </Field>
-                      <Field label="Telefono (WhatsApp)">
-                        <input type="tel" value={data.telefono} onChange={set("telefono")} autoComplete="tel" required className={inputClass} />
-                      </Field>
-                    </div>
-                    <Field label="Email" optional>
-                      <input type="email" value={data.email} onChange={set("email")} autoComplete="email" className={inputClass} />
+                    <h1 className="font-display text-4xl md:text-6xl leading-[1.05] text-white">Quasi fatto</h1>
+                    <p className="text-gray-400 mb-4">La richiesta arriva allo studio su WhatsApp, dal tuo numero: ti rispondiamo lì.</p>
+                    <Field label="Come ti chiami?">
+                      <input type="text" value={data.nome} onChange={set("nome")} autoComplete="given-name" required className={inputClass} />
                     </Field>
                     {artistsData.length > 1 && (
                       <fieldset>
@@ -361,11 +340,6 @@ export default function Booking() {
                         <Link to="/privacy-policy" className="text-white underline underline-offset-4">privacy policy</Link>.
                       </span>
                     </label>
-                    {status === "error" && (
-                      <p role="alert" className="text-white border border-red-400/60 bg-red-950/40 p-4">
-                        La richiesta non è partita, controlla la connessione e riprova. Oppure mandala su WhatsApp con il bottone qui sotto.
-                      </p>
-                    )}
                   </div>
                 )}
               </div>
@@ -379,16 +353,11 @@ export default function Booking() {
                 )}
                 <button
                   type="submit"
-                  disabled={!canContinue || status === "sending"}
-                  className="min-h-12 px-8 bg-white text-black font-semibold transition-colors hover:bg-verde disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed"
+                  disabled={!canContinue}
+                  className="inline-flex items-center gap-3 min-h-12 px-8 bg-white text-black font-semibold transition-colors hover:bg-verde disabled:bg-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed"
                 >
-                  {current === "contatti" ? (status === "sending" ? "Invio in corso…" : "Invia la richiesta") : "Continua"}
+                  {current === "contatti" ? (<><FaWhatsapp size={20} aria-hidden="true" /> Invia su WhatsApp</>) : "Continua"}
                 </button>
-                {current === "contatti" && (
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-gray-300 hover:text-white underline underline-offset-4 decoration-verde">
-                    <FaWhatsapp size={18} /> Preferisco mandarla su WhatsApp
-                  </a>
-                )}
               </div>
             </form>
           )}

@@ -42,7 +42,6 @@ export const NAV_LINKS = [
 
 // Pagina di richiesta guidata: è la destinazione di tutti i "Prenota"
 export const BOOKING_PATH = "/prenota"
-export const BOOKING_FORM_ENDPOINT = "https://formspree.io/f/xbdqgrjr"
 
 // Prezzo minimo di una seduta, mostrato in home. null = non ancora definito con lo studio
 export const PRICE_MIN = null
