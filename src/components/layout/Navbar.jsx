@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { Menu, X } from "lucide-react"
 import { FaInstagram, FaWhatsapp } from "react-icons/fa"
-import { NAV_LINKS, CONTACT } from "../../utils/constants"
+import { NAV_LINKS, CONTACT, BOOKING_PATH } from "../../utils/constants"
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -42,7 +42,7 @@ export default function Navbar() {
             />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2" aria-label="Principale">
+          <nav className="hidden xl:flex items-center gap-8 absolute left-1/2 -translate-x-1/2" aria-label="Principale">
             {NAV_LINKS.map((link) => {
               const active = pathname === link.path
               return (
@@ -62,18 +62,32 @@ export default function Navbar() {
             })}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-5 ml-auto">
+          <div className="hidden xl:flex items-center gap-5 ml-auto">
             <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-300 hover:text-verde transition-colors">
               <FaInstagram size={20} />
             </a>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-gray-300 hover:text-verde transition-colors">
               <FaWhatsapp size={20} />
             </a>
+            <Link
+              to={BOOKING_PATH}
+              className="ml-2 inline-flex items-center min-h-10 px-5 bg-white text-black text-[15px] font-semibold hover:bg-verde transition-colors"
+            >
+              Prenota
+            </Link>
           </div>
+
+          <Link
+            to={BOOKING_PATH}
+            onClick={() => setOpen(false)}
+            className="xl:hidden ml-auto mr-2 inline-flex items-center min-h-10 px-4 bg-white text-black text-sm font-semibold"
+          >
+            Prenota
+          </Link>
 
           <button
             type="button"
-            className="lg:hidden text-white ml-auto w-11 h-11 -mr-2 flex items-center justify-center"
+            className="xl:hidden text-white w-11 h-11 -mr-2 flex items-center justify-center"
             onClick={() => setOpen(!open)}
             aria-label={open ? "Chiudi il menu" : "Apri il menu"}
             aria-expanded={open}
@@ -88,7 +102,7 @@ export default function Navbar() {
       <nav
         id="menu-mobile"
         aria-label="Principale"
-        className={`lg:hidden fixed inset-x-0 top-16 bottom-0 bg-black transition-[opacity,visibility] duration-400 ${
+        className={`xl:hidden fixed inset-x-0 top-16 bottom-0 bg-black transition-[opacity,visibility] duration-400 ${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >

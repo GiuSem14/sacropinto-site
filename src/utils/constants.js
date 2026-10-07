@@ -31,11 +31,19 @@ export const HOURS = [
 ]
 
 export const NAV_LINKS = [
-  { label: "Home", path: "/" },
-  { label: "Portfolio", path: "/portfolio" },
+  { label: "Lavori", path: "/portfolio" },
+  { label: "Come funziona", path: "/#percorso" },
   { label: "Artisti", path: "/artisti" },
   { label: "Guest", path: "/guest" },
-  { label: "Servizi", path: "/servizi" },
+  { label: "Cura del tatuaggio", path: "/cura" },
   { label: "FAQ", path: "/faq" },
   { label: "Contatti", path: "/contatti" },
 ]
+
+// Pagina di richiesta guidata: è la destinazione di tutti i "Prenota"
+export const BOOKING_PATH = "/prenota"
+export const BOOKING_FORM_ENDPOINT = "https://formspree.io/f/xbdqgrjr"
+
+// Prezzo minimo di una seduta, mostrato in home. null = non ancora definito con lo studio
+export const PRICE_MIN = null
+export const MIN_AGE = 18
