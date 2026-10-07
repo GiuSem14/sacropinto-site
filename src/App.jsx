@@ -17,6 +17,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy"
 import CookiePolicy from "./pages/CookiePolicy"
 import NotFound from "./pages/NotFound"
 import Guest from "./pages/Guest"
+import Booking from "./pages/Booking"
 
 function ScrollToTop() {
   useScrollToTop()
@@ -43,6 +44,7 @@ export default function App() {
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/cookie-policy" element={<CookiePolicy />} />
                 <Route path="/guest" element={<Guest />} />
+                <Route path="/prenota" element={<Booking />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
