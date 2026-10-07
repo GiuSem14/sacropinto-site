@@ -10,12 +10,13 @@ export default function Footer() {
 
   return (
     <footer className="bg-black border-t border-gray-800 text-gray-400 mt-auto">
+      <div aria-hidden="true" className="stitch-line-h h-px" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
           {/* Colonna 1 — Brand + social */}
           <div>
-            <p className="text-white font-bold text-xl tracking-widest uppercase mb-3">
+            <p className="font-display text-white text-3xl mb-3">
               {SITE_NAME}
             </p>
             <p className="text-sm leading-relaxed mb-4">
@@ -27,7 +28,7 @@ export default function Footer() {
                 href={CONTACT.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-white hover:text-gray-300 transition-colors"
+                className="inline-flex items-center gap-2 text-white hover:text-verde transition-colors"
                 aria-label="Instagram"
               >
                 <FaInstagram size={18} />
@@ -37,7 +38,7 @@ export default function Footer() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-white hover:text-gray-300 transition-colors"
+                className="inline-flex items-center gap-2 text-white hover:text-verde transition-colors"
                 aria-label="WhatsApp"
               >
                 <FaWhatsapp size={18} />
@@ -48,11 +49,11 @@ export default function Footer() {
 
           {/* Colonna 2 — Navigazione */}
           <div>
-            <p className="text-white font-semibold uppercase tracking-wide text-sm mb-4">Navigazione</p>
+            <p className="text-white font-semibold mb-4">Navigazione</p>
             <ul className="flex flex-col gap-2">
               {NAV_LINKS.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-sm hover:text-white transition-colors">
+                  <Link to={link.path} className="text-sm hover:text-verde transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -62,7 +63,7 @@ export default function Footer() {
 
           {/* Colonna 3 — Contatti */}
           <div>
-            <p className="text-white font-semibold uppercase tracking-wide text-sm mb-4">Contatti</p>
+            <p className="text-white font-semibold mb-4">Contatti</p>
             <ul className="flex flex-col gap-2 text-sm">
               <li>{CONTACT.address}</li>
               <li>

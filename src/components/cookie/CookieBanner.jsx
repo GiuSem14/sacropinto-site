@@ -34,7 +34,7 @@ export default function CookieBanner() {
 
               {/* Text */}
               <div className="flex-1">
-                <p className="text-white font-semibold uppercase tracking-wide text-sm mb-2">
+                <p className="text-white font-semibold text-sm mb-2">
                   Cookie policy
                 </p>
                 <p className="text-gray-400 text-sm leading-relaxed">
@@ -56,19 +56,19 @@ export default function CookieBanner() {
               <div className="flex flex-col sm:flex-row gap-3 shrink-0">
                 <button
                   onClick={rejectAll}
-                  className="border border-gray-700 text-gray-300 hover:text-white hover:border-gray-400 uppercase tracking-widest text-xs px-5 py-3 transition-colors"
+                  className="border border-gray-700 text-gray-300 hover:text-white hover:border-gray-400 text-sm px-5 py-2.5 transition-colors"
                 >
                   Rifiuta tutto
                 </button>
                 <button
                   onClick={openPreferences}
-                  className="border border-gray-700 text-gray-300 hover:text-white hover:border-gray-400 uppercase tracking-widest text-xs px-5 py-3 transition-colors"
+                  className="border border-gray-700 text-gray-300 hover:text-white hover:border-gray-400 text-sm px-5 py-2.5 transition-colors"
                 >
                   Personalizza
                 </button>
                 <button
                   onClick={acceptAll}
-                  className="bg-white text-black font-semibold uppercase tracking-widest text-xs px-5 py-3 hover:bg-gray-200 transition-colors"
+                  className="bg-white text-black font-semibold text-sm px-5 py-2.5 hover:bg-verde transition-colors"
                 >
                   Accetta tutto
                 </button>

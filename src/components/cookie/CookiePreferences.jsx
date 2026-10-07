@@ -58,7 +58,7 @@ export default function CookiePreferences() {
         {/* Header */}
         <h2
           id="cookie-preferences-title"
-          className="text-2xl font-bold text-white mb-2 uppercase tracking-wide"
+          className="font-display text-3xl text-white mb-2"
         >
           Preferenze cookie
         </h2>
@@ -74,12 +74,12 @@ export default function CookiePreferences() {
           <div className="border-t border-gray-800 pt-5">
             <div className="flex items-start justify-between gap-4 mb-2">
               <div>
-                <h3 className="text-white font-semibold uppercase tracking-wide text-sm">
+                <h3 className="text-white font-semibold text-sm">
                   Necessari
                 </h3>
                 <p className="text-gray-500 text-xs mt-1">Sempre attivi</p>
               </div>
-              <div className="shrink-0 px-3 py-1 border border-gray-700 text-gray-500 text-xs uppercase tracking-wide">
+              <div className="shrink-0 px-3 py-1 border border-gray-700 text-gray-500 text-xs">
                 Obbligatori
               </div>
             </div>
@@ -92,7 +92,7 @@ export default function CookiePreferences() {
           {/* Analytics — toggleable */}
           <div className="border-t border-gray-800 pt-5">
             <div className="flex items-start justify-between gap-4 mb-2">
-              <h3 className="text-white font-semibold uppercase tracking-wide text-sm">
+              <h3 className="text-white font-semibold text-sm">
                 Statistiche
               </h3>
               <button
@@ -119,7 +119,7 @@ export default function CookiePreferences() {
           {/* Marketing — toggleable */}
           <div className="border-t border-gray-800 pt-5">
             <div className="flex items-start justify-between gap-4 mb-2">
-              <h3 className="text-white font-semibold uppercase tracking-wide text-sm">
+              <h3 className="text-white font-semibold text-sm">
                 Marketing
               </h3>
               <button
@@ -148,7 +148,7 @@ export default function CookiePreferences() {
         {/* Save button */}
         <button
           onClick={handleSave}
-          className="w-full bg-white text-black font-semibold uppercase tracking-widest text-sm py-3 hover:bg-gray-200 transition-colors"
+          className="w-full bg-white text-black font-semibold text-sm py-3 hover:bg-gray-200 transition-colors"
         >
           Salva preferenze
         </button>
