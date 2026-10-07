@@ -1,17 +1,18 @@
 import { FaInstagram } from "react-icons/fa"
-import { User } from "lucide-react"
+import { CalendarDays, User } from "lucide-react"
 import Reveal from "../ui/Reveal"
-import { guestDates, bookDateUrl, instagramUrl } from "./guestLinks"
+import { instagramUrl } from "./guestLinks"
+import { formatPeriod } from "../../utils/guestDates"
 
 /*
   Ogni guest è una locandina a tutta altezza, come quelle appese in studio:
-  foto, nome enorme, e le date come biglietti con il bordo tratteggiato da staccare.
+  foto, nome enorme, il periodo in studio e il bottone per scegliere il giorno.
   Si scorrono di lato.
 */
-export default function GuestPosters({ guests }) {
+export default function GuestPosters({ guests, onBook }) {
   return (
     <div className="flex gap-5 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-      {guests.map((guest, index) => (
+      {guests.map(({ guest, periods }, index) => (
         <Reveal
           as="article"
           key={guest.nome}
@@ -32,23 +33,28 @@ export default function GuestPosters({ guests }) {
             </div>
           </div>
 
-          <div className="p-6 pt-2 flex-1 flex flex-col gap-3">
-            {guestDates(guest).map((date) => (
-              <a
-                key={date}
-                href={bookDateUrl(guest, date)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-stretch min-h-14 bg-black text-white hover:bg-verde hover:text-black transition-colors"
+          <div className="p-6 pt-2 flex-1 flex flex-col gap-4">
+            {periods.length > 0 ? (
+              <p className="flex items-center gap-3 text-white">
+                <CalendarDays size={20} className="text-verde shrink-0" aria-hidden="true" />
+                <span className="font-display text-2xl">{periods.map(formatPeriod).join(", ")}</span>
+              </p>
+            ) : (
+              <p className="text-gray-400">Date in arrivo.</p>
+            )}
+            {periods.length > 0 && (
+              <button
+                type="button"
+                onClick={() => onBook(guest.nome)}
+                className="group flex items-stretch min-h-14 bg-white text-black hover:bg-verde transition-colors"
               >
-                <span className="flex-1 flex items-center px-4 font-display text-2xl">{date}</span>
-                <span aria-hidden="true" className="w-px my-2 stitch-line opacity-60" />
-                <span className="flex items-center px-4 font-semibold">Prenota</span>
-              </a>
-            ))}
-            {guestDates(guest).length === 0 && <p className="text-gray-400">Date in arrivo.</p>}
+                <span className="flex-1 flex items-center px-4 font-semibold">Prenota un giorno</span>
+                <span aria-hidden="true" className="w-px my-2 stitch-line" />
+                <span className="flex items-center px-4">Scegli</span>
+              </button>
+            )}
             {guest.instagram && (
-              <a href={instagramUrl(guest)} target="_blank" rel="noopener noreferrer" className="mt-auto pt-3 inline-flex items-center gap-2 text-gray-300 hover:text-white">
+              <a href={instagramUrl(guest)} target="_blank" rel="noopener noreferrer" className="mt-auto pt-2 inline-flex items-center gap-2 text-gray-300 hover:text-white">
                 <FaInstagram size={18} /> I suoi lavori
               </a>
             )}

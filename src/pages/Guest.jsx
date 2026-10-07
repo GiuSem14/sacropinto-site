@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { Helmet } from "react-helmet-async"
 import { FaInstagram, FaWhatsapp } from "react-icons/fa"
 import { buildMeta } from "../utils/seo"
@@ -6,7 +6,10 @@ import { fetchGuests } from "../data/guestUtils"
 import { CONTACT } from "../utils/constants"
 import PageHeader from "../components/layout/PageHeader"
 import GuestPosters from "../components/guest/GuestPosters"
-import { applyAsGuestUrl } from "../components/guest/guestLinks"
+import GuestBookingDialog from "../components/guest/GuestBookingDialog"
+import Reveal from "../components/ui/Reveal"
+import { applyAsGuestUrl, instagramUrl } from "../components/guest/guestLinks"
+import { parseGuestPeriods, isPastGuest, formatPeriod } from "../utils/guestDates"
 
 function Loading() {
   return (
@@ -32,6 +35,31 @@ function Empty({ message }) {
   )
 }
 
+// Guest che sono già stati in studio: archivio senza prenotazione
+function PastGuests({ items }) {
+  return (
+    <section className="mt-24" aria-labelledby="guest-passati">
+      <h2 id="guest-passati" className="font-display text-3xl md:text-4xl text-white">Sono già passati da noi</h2>
+      <ul className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        {items.map(({ guest, periods }, index) => (
+          <Reveal as="li" key={guest.nome} delay={index * 80}>
+            <div className="aspect-square bg-gray-900 overflow-hidden">
+              {guest.foto && <img src={guest.foto} alt={`${guest.nome}, guest artist`} loading="lazy" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />}
+            </div>
+            <p className="mt-3 font-display text-xl text-white">{guest.nome}</p>
+            <p className="text-sm text-gray-400">{[guest.stile, periods.map(formatPeriod).join(", ")].filter(Boolean).join(", ")}</p>
+            {guest.instagram && (
+              <a href={instagramUrl(guest)} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white">
+                <FaInstagram size={14} /> Instagram
+              </a>
+            )}
+          </Reveal>
+        ))}
+      </ul>
+    </section>
+  )
+}
+
 export default function Guest() {
   const [guests, setGuests] = useState([])
   const [loading, setLoading] = useState(true)
@@ -43,6 +71,18 @@ export default function Guest() {
       .catch(() => setError("Non riusciamo a caricare i guest in questo momento."))
       .finally(() => setLoading(false))
   }, [])
+
+  const [booking, setBooking] = useState(null)
+
+  // Ogni guest con i suoi periodi in studio; chi ha finito va nell'archivio
+  const { upcoming, past } = useMemo(() => {
+    const all = guests.map((guest) => ({ guest, periods: parseGuestPeriods(guest.date) }))
+    return {
+      upcoming: all.filter((item) => !isPastGuest(item.periods)),
+      past: all.filter((item) => isPastGuest(item.periods)),
+    }
+  }, [guests])
+  const bookingItem = upcoming.find((item) => item.guest.nome === booking)
 
   const meta = buildMeta({
     title: "Artisti Guest",
@@ -71,15 +111,16 @@ export default function Guest() {
 
       <PageHeader
         title="Artisti guest"
-        intro="Tatuatori ospiti in studio per pochi giorni. Le date sono limitate: scegli quella che ti serve e prenotala su WhatsApp."
+        intro="Tatuatori ospiti in studio per pochi giorni. Scegli il giorno che ti serve dentro il loro periodo e prenotalo su WhatsApp."
       />
 
       <section className="bg-black pt-12 pb-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading && <Loading />}
           {!loading && error && <Empty message={error} />}
-          {!loading && !error && guests.length === 0 && <Empty message="Nessun guest in programma, per ora." />}
-          {!loading && !error && guests.length > 0 && <GuestPosters guests={guests} />}
+          {!loading && !error && upcoming.length === 0 && <Empty message="Nessun guest in programma, per ora." />}
+          {!loading && !error && upcoming.length > 0 && <GuestPosters guests={upcoming} onBook={setBooking} />}
+          {!loading && !error && past.length > 0 && <PastGuests items={past} />}
 
           <div className="mt-20 pt-12 border-t border-gray-800 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
@@ -92,6 +133,10 @@ export default function Guest() {
           </div>
         </div>
       </section>
+
+      {bookingItem && (
+        <GuestBookingDialog guest={bookingItem.guest} periods={bookingItem.periods} onClose={() => setBooking(null)} />
+      )}
     </>
   )
 }
