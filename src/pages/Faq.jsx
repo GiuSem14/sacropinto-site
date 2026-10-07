@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async"
 import { faqData } from "../data/faq"
 import Container from "../components/layout/Container"
 import { buildMeta } from "../utils/seo"
-import sfondoBg from "../assets/Sfondo.JPG"
+import PageHeader from "../components/layout/PageHeader"
 
 function FAQItem({ question, answer }) {
   const [open, setOpen] = useState(false)
@@ -58,20 +58,10 @@ export default function Faq() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
-      {/* Header con sfondo marmo */}
-      <section className="relative overflow-hidden bg-black py-24">
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${sfondoBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="absolute inset-0 bg-black/70" />
-        <Container>
-          <div className="relative z-10 max-w-2xl mx-auto text-center">
-            <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Hai dei dubbi?</p>
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Domande frequenti</h1>
-            <p className="text-gray-400 mb-12 text-lg">
-              Tutto quello che devi sapere prima di prenotare il tuo tatuaggio a Piazza Armerina.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        title="Domande frequenti"
+        intro="Tutto quello che devi sapere prima di prenotare il tuo tatuaggio a Piazza Armerina."
+      />
 
       {/* Contenuto */}
       <section className="bg-black pt-12 pb-24">

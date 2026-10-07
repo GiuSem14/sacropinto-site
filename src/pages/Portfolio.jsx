@@ -16,7 +16,8 @@ import Container from "../components/layout/Container"
 import { portfolioData, portfolioStyles } from "../data/portfolio"
 import { buildMeta } from "../utils/seo"
 import Button from "../components/ui/Button"
-import sfondoBg from "../assets/Sfondo.JPG"
+import Reveal from "../components/ui/Reveal"
+import PageHeader from "../components/layout/PageHeader"
 
 export default function Portfolio() {
   const meta = buildMeta({
@@ -56,20 +57,10 @@ export default function Portfolio() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
-      {/* Header con sfondo marmo */}
-      <section className="relative overflow-hidden bg-black py-24">
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${sfondoBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="absolute inset-0 bg-black/70" />
-        <Container>
-          <div className="relative z-10 max-w-2xl mx-auto text-center">
-            <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">I nostri lavori</p>
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Portfolio</h1>
-            <p className="text-gray-400 text-lg leading-relaxed">
-              Ogni tatuaggio è un progetto unico. Esplora i nostri lavori e trovaci lo stile che fa per te.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        title="Portfolio"
+        intro="Ogni tatuaggio è un progetto unico. Esplora i nostri lavori e trovaci lo stile che fa per te."
+      />
 
       {/* Contenuto */}
       <section className="bg-black pt-12 pb-24">
@@ -77,15 +68,16 @@ export default function Portfolio() {
         <FadeInSection>
 
           {/* Filtri */}
-          <div className="flex flex-wrap gap-2 justify-center mb-12">
+          <div className="flex flex-wrap gap-2 mb-12">
             {portfolioStyles.map((style) => (
               <button
                 key={style}
                 onClick={() => setActiveStyle(style)}
-                className={`px-4 py-2 text-xs uppercase tracking-widest transition-colors duration-200 border ${
+                aria-pressed={activeStyle === style}
+                className={`min-h-11 px-5 py-2 text-[15px] transition-colors duration-300 border ${
                   activeStyle === style
                     ? "bg-white text-black border-white"
-                    : "bg-transparent text-gray-400 border-gray-700 hover:border-gray-400 hover:text-white"
+                    : "bg-transparent text-gray-300 border-gray-700 hover:border-verde hover:text-white"
                 }`}
               >
                 {style}
@@ -94,36 +86,27 @@ export default function Portfolio() {
           </div>
 
           {/* Griglia */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
             {filtered.map((item, index) => (
-              <div
-                key={item.id}
-                className="aspect-square bg-gray-900 relative overflow-hidden group cursor-pointer"
-                onClick={() => setLightboxIndex(index)}
-              >
-                {item.image ? (
+              <Reveal key={`${activeStyle}-${item.id}`} variant="clip" delay={(index % 3) * 100} className="relative aspect-[4/5] bg-gray-900">
+                <button
+                  type="button"
+                  onClick={() => setLightboxIndex(index)}
+                  aria-label={`Apri ${item.title} a schermo intero`}
+                  className="group absolute inset-0 overflow-hidden text-left"
+                >
                   <img
                     src={item.image}
                     alt={item.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-[1200ms] ease-[var(--ease-out-soft)] group-hover:scale-[1.06]"
                   />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center text-gray-700">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <rect x="3" y="3" width="18" height="18" rx="2"/>
-                      <circle cx="8.5" cy="8.5" r="1.5"/>
-                      <path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                    <span className="text-xs mt-2 uppercase tracking-wide">{item.style}</span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <div>
-                    <p className="text-white text-sm font-medium">{item.title}</p>
-                    <p className="text-gray-400 text-xs uppercase tracking-widest">{item.style}</p>
-                  </div>
-                </div>
-              </div>
+                  <span className="absolute inset-x-0 bottom-0 p-4 pt-16 bg-gradient-to-t from-black/85 to-transparent opacity-0 translate-y-2 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100">
+                    <span className="block font-display text-xl text-white">{item.title}</span>
+                    <span className="block text-sm text-gray-300">{item.style}</span>
+                  </span>
+                </button>
+              </Reveal>
             ))}
           </div>
 

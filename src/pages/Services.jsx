@@ -13,7 +13,7 @@ function FadeInSection({ children }) {
 import { servicesData } from "../data/services"
 import { buildMeta } from "../utils/seo"
 import Button from "../components/ui/Button"
-import sfondoBg from "../assets/Sfondo.JPG"
+import PageHeader from "../components/layout/PageHeader"
 
 export default function Services() {
   const meta = buildMeta({
@@ -46,20 +46,10 @@ export default function Services() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
-      {/* Header con sfondo marmo */}
-      <section className="relative overflow-hidden bg-black py-24">
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${sfondoBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="absolute inset-0 bg-black/70" />
-        <Container>
-          <div className="relative z-10 max-w-2xl mx-auto text-center">
-            <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Cosa facciamo</p>
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Servizi</h1>
-            <p className="text-gray-400 text-lg leading-relaxed">
-              Ogni progetto è unico. Che tu abbia un'idea precisa o un vago senso di quello che vuoi, siamo qui per trasformarla in qualcosa di permanente e personale.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        title="Servizi"
+        intro="Ogni progetto è unico. Che tu abbia un'idea precisa o un vago senso di quello che vuoi, siamo qui per trasformarla in qualcosa di permanente e personale."
+      />
 
       {/* Contenuto */}
       <section className="bg-black pt-12 pb-24">

@@ -14,7 +14,7 @@ function FadeInSection({ children }) {
 import { buildMeta } from "../utils/seo"
 import Button from "../components/ui/Button"
 import { CONTACT, HOURS, GOOGLE_MAPS_EMBED_URL } from "../utils/constants"
-import sfondoBg from "../assets/Sfondo.JPG"
+import PageHeader from "../components/layout/PageHeader"
 
 export default function Contact() {
   const meta = buildMeta({
@@ -47,20 +47,10 @@ export default function Contact() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
-      {/* 1. Header con sfondo marmo */}
-      <section className="relative overflow-hidden bg-black py-24">
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${sfondoBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="absolute inset-0 bg-black/70" />
-        <Container>
-          <div className="relative z-10 max-w-2xl mx-auto text-center">
-            <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Vieni a trovarci</p>
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Contatti</h1>
-            <p className="text-gray-400 text-lg leading-relaxed">
-              Hai un progetto in mente? Scrivici, chiamaci o passa direttamente in studio. La prima consulenza è sempre gratuita.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        title="Contatti"
+        intro="Hai un progetto in mente? Scrivici, chiamaci o passa direttamente in studio. La prima consulenza è sempre gratuita."
+      />
 
       {/* Contenuto */}
       <section className="bg-black pt-12 pb-24">

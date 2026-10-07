@@ -5,7 +5,7 @@ import useFadeIn from "../hooks/useFadeIn"
 import Container from "../components/layout/Container"
 import { buildMeta } from "../utils/seo"
 import { fetchGuests } from "../data/guestUtils"
-import sfondoBg from "../assets/Sfondo.JPG"
+import PageHeader from "../components/layout/PageHeader"
 
 function FadeInSection({ children }) {
   const ref = useFadeIn()
@@ -58,20 +58,10 @@ export default function Guest() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
 
-      {/* Header con sfondo marmo */}
-      <section className="relative overflow-hidden bg-black py-24">
-        <div className="absolute inset-0" style={{ backgroundImage: `url(${sfondoBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
-        <div className="absolute inset-0 bg-black/70" />
-        <Container>
-          <div className="relative z-10 max-w-2xl mx-auto text-center">
-            <p className="text-gray-500 uppercase tracking-widest text-sm mb-3">Ospiti</p>
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-white mb-4">Artisti Guest</h1>
-            <p className="text-gray-400 text-lg leading-relaxed">
-              Artisti ospiti in studio per sessioni speciali. Date limitate, stili unici.
-            </p>
-          </div>
-        </Container>
-      </section>
+      <PageHeader
+        title="Artisti Guest"
+        intro="Artisti ospiti in studio per sessioni speciali. Date limitate, stili unici."
+      />
 
       {/* Contenuto */}
       <section className="bg-black pt-12 pb-24">
