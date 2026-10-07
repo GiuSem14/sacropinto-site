@@ -84,6 +84,17 @@ body {
   clip-path: inset(0 0 0 0);
 }
 
+/* "engrave": il testo si incide da sinistra a destra, come il logo */
+[data-reveal="engrave"] > * {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1400ms var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="engrave"].is-revealed > * {
+  clip-path: inset(0 0 0 0);
+}
+
 /* ------------------------------------------------------------------
    Hero: un'unica sequenza d'ingresso orchestrata
    ------------------------------------------------------------------ */
@@ -171,7 +182,8 @@ body {
   html { scroll-behavior: auto; }
   [data-reveal],
   [data-reveal="up"],
-  [data-reveal="clip"] > * {
+  [data-reveal="clip"] > *,
+  [data-reveal="engrave"] > * {
     opacity: 1;
     transform: none;
     clip-path: none;

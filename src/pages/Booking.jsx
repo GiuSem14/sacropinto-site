@@ -6,11 +6,14 @@ import { FaWhatsapp } from "react-icons/fa"
 import { buildMeta } from "../utils/seo"
 import { BOOKING_FORM_ENDPOINT, CONTACT } from "../utils/constants"
 import { requestTypes, styleGuide, bodyZones, sizes } from "../data/studio"
+import { artistsData } from "../data/artists"
 
 const UNSURE_STYLE = "Non lo so ancora, consigliatemi"
+const ANY_ARTIST = "Indifferente"
 
 const EMPTY = {
   tipo: "",
+  artista: "",
   stile: "",
   zona: "",
   misura: "",
@@ -83,6 +86,7 @@ function buildSummary(data) {
   const misura = sizes.find((s) => s.id === data.misura)
   const rows = [
     ["Richiesta", tipo],
+    ["Artista", data.artista],
     ["Stile", data.stile],
     ["Zona", data.zona],
     ["Misura", misura ? `${misura.label} (${misura.hint})` : ""],
@@ -110,7 +114,8 @@ export default function Booking() {
   const initial = useMemo(() => {
     const style = styleGuide.find((s) => s.id === params.get("stile"))
     const tipo = requestTypes.find((t) => t.id === params.get("tipo"))
-    return { ...EMPTY, stile: style ? style.name : "", tipo: tipo ? tipo.id : "" }
+    const artist = artistsData.find((a) => String(a.id) === params.get("artista"))
+    return { ...EMPTY, stile: style ? style.name : "", tipo: tipo ? tipo.id : "", artista: artist ? artist.name : "" }
   }, [params])
 
   const [data, setData] = useState(initial)
@@ -332,6 +337,16 @@ export default function Booking() {
                     <Field label="Email" optional>
                       <input type="email" value={data.email} onChange={set("email")} autoComplete="email" className={inputClass} />
                     </Field>
+                    {artistsData.length > 1 && (
+                      <fieldset>
+                        <legend className="text-gray-300 mb-3">Con chi vorresti farlo? <span className="text-gray-500">(facoltativo)</span></legend>
+                        <div className="flex flex-wrap gap-2">
+                          {[...artistsData.map((a) => a.name), ANY_ARTIST].map((name) => (
+                            <Chip key={name} name="artista" value={name} checked={data.artista === name} onChange={set("artista")} />
+                          ))}
+                        </div>
+                      </fieldset>
+                    )}
                     <Field label="Quando sei disponibile?" optional>
                       <input type="text" value={data.disponibilita} onChange={set("disponibilita")} className={inputClass} placeholder="Es. pomeriggi infrasettimanali, sabato mattina" />
                     </Field>
