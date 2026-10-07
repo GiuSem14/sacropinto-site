@@ -1,18 +1,12 @@
 import { Helmet } from "react-helmet-async"
 import Hero from "../components/sections/Hero"
 import HomePortfolioPreview from "../components/sections/HomePortfolioPreview"
+import ArtistsPreview from "../components/sections/ArtistsPreview"
+import ServicesPreview from "../components/sections/ServicesPreview"
+import FAQPreview from "../components/sections/FAQPreview"
 import ContactCTA from "../components/sections/ContactCTA"
+import StitchedColumn from "../components/layout/StitchedColumn"
 import { buildMeta } from "../utils/seo"
-import useFadeIn from "../hooks/useFadeIn"
-
-function FadeInSection({ children }) {
-  const ref = useFadeIn()
-  return (
-    <div ref={ref} className="opacity-0 translate-y-16 transition-all duration-1000 ease-out">
-      {children}
-    </div>
-  )
-}
 
 export default function Home() {
   const meta = buildMeta({
@@ -44,8 +38,13 @@ export default function Home() {
         <meta name="twitter:image" content={meta.twitterImage} />
       </Helmet>
       <Hero />
-      <FadeInSection><HomePortfolioPreview /></FadeInSection>
-      <FadeInSection><ContactCTA /></FadeInSection>
+      <StitchedColumn>
+        <HomePortfolioPreview />
+        <ArtistsPreview />
+        <ServicesPreview />
+        <FAQPreview />
+      </StitchedColumn>
+      <ContactCTA />
     </>
   )
 }

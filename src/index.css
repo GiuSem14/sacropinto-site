@@ -56,7 +56,8 @@ body {
    data-reveal="up"   → sale e appare
    data-reveal="clip" → l'immagine si scopre dal basso, come una tela
    ------------------------------------------------------------------ */
-[data-reveal] {
+[data-reveal],
+[data-reveal="clip"] > * {
   transition:
     opacity 900ms var(--ease-out-soft),
     transform 900ms var(--ease-out-soft),
@@ -69,13 +70,17 @@ body {
   transform: translateY(28px);
 }
 
-[data-reveal="clip"] {
+/* Il clip va sui figli: l'IntersectionObserver deve poter "vedere" il contenitore */
+[data-reveal="clip"] > * {
   clip-path: inset(100% 0 0 0);
 }
 
 [data-reveal].is-revealed {
   opacity: 1;
   transform: none;
+}
+
+[data-reveal="clip"].is-revealed > * {
   clip-path: inset(0 0 0 0);
 }
 
@@ -126,7 +131,7 @@ body {
   html { scroll-behavior: auto; }
   [data-reveal],
   [data-reveal="up"],
-  [data-reveal="clip"] {
+  [data-reveal="clip"] > * {
     opacity: 1;
     transform: none;
     clip-path: none;

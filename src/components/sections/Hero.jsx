@@ -1,64 +1,62 @@
 import Button from "../ui/Button"
-import { CONTACT } from "../../utils/constants"
 import sfondoBg from "../../assets/Sfondo.JPG"
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-black overflow-hidden">
+    <section className="relative -mt-16 min-h-svh flex items-center justify-center bg-black overflow-hidden">
 
-      {/* Immagine di sfondo */}
+      {/* Lastra ossidata: si assesta lentamente all'apertura */}
       <img
         src={sfondoBg}
         alt=""
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover"
+        fetchPriority="high"
+        className="hero-bg absolute inset-0 w-full h-full object-cover"
       />
+      <div className="absolute inset-0 bg-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
 
-      {/* Overlay scuro per leggibilità */}
-      <div className="absolute inset-0 bg-black/20" />
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 pt-28 pb-36 flex flex-col items-center text-center">
 
-      {/* Fade verso il basso */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1a1210]/80" />
+        {/* Il logo viene "inciso" da sinistra a destra */}
+        <h1 className="w-full">
+          <img
+            src="/logo-sacropinto.png"
+            alt="Sacropinto, tatuaggi e piercing"
+            className="hero-logo w-full max-w-[760px] h-auto mx-auto object-contain drop-shadow-[0_2px_0_rgba(0,0,0,0.4)]"
+          />
+        </h1>
 
-      {/* Contenuto */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-
-        <p className="text-gray-400 uppercase tracking-[0.3em] text-sm mb-6">
-          Tattoo Studio — Piazza Armerina, Sicilia
+        <p className="hero-rise mt-10 text-lg md:text-xl text-white/90 max-w-xl leading-relaxed" style={{ animationDelay: "1.5s" }}>
+          Tatuaggi su misura e piercing in via Chiarandà, nel centro di Piazza Armerina. Si parte sempre da una chiacchierata.
         </p>
 
-        <img
-          src="/logo-sacropinto.png"
-          alt="Sacropinto Tattoo Studio"
-          className="w-auto mx-auto object-contain mb-6"
-          style={{ maxHeight: "260px" }}
-        />
-
-        <p className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto mb-10 leading-relaxed">
-          Arte sulla pelle. Ogni tatuaggio è un progetto unico, realizzato con cura artigianale nel cuore della Sicilia.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="hero-rise mt-10 flex flex-col sm:flex-row gap-4 justify-center" style={{ animationDelay: "1.75s" }}>
           <Button href="/contatti#scrivici" variant="primary">
             Prenota una consulenza
           </Button>
           <Button href="/portfolio" variant="outline">
-            Scopri il portfolio
-          </Button>
-          <Button href="https://calendly.com/seminato-giuseppe98/30min" variant="outline" target="_blank">
-            Prenota online
+            Guarda i lavori
           </Button>
         </div>
 
+        <a
+          href="https://calendly.com/seminato-giuseppe98/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hero-rise mt-6 text-sm text-gray-300 underline underline-offset-4 decoration-verde hover:text-white transition-colors"
+          style={{ animationDelay: "1.95s" }}
+        >
+          Oppure scegli tu data e ora online
+        </a>
       </div>
 
-      {/* Freccia scroll */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-600">
-          <path d="M12 5v14M5 12l7 7 7-7"/>
-        </svg>
+      {/* Il filo scende dall'hero e prosegue nella cucitura della pagina */}
+      <div aria-hidden="true" className="absolute bottom-0 inset-x-0">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="thread-cue stitch-line w-[2px] h-24" />
+        </div>
       </div>
-
     </section>
   )
 }
