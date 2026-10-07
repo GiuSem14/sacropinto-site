@@ -9,7 +9,7 @@ export default function ContactCTA() {
   return (
     <section className="relative py-28 bg-gray-900 overflow-hidden">
       <Container>
-        <div className="grid lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-16 items-start">
           <div>
             <Reveal as="h2" className="font-display text-5xl md:text-7xl leading-[1.02] text-white max-w-[12ch]">
               Raccontaci la tua idea
@@ -18,7 +18,7 @@ export default function ContactCTA() {
               Un'idea, una foto di riferimento o solo la zona del corpo: il resto lo vediamo insieme. La consulenza è gratuita.
             </Reveal>
             <Reveal delay={300} className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Button href="/contatti#scrivici" variant="primary">Prenota una consulenza</Button>
+              <Button href="/prenota" variant="primary">Richiedi il tuo tatuaggio</Button>
               <Button href={whatsappUrl} variant="outline" target="_blank" rel="noopener noreferrer">
                 Scrivi su WhatsApp
               </Button>

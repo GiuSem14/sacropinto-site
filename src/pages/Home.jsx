@@ -1,8 +1,10 @@
 import { Helmet } from "react-helmet-async"
 import Hero from "../components/sections/Hero"
-import HomePortfolioPreview from "../components/sections/HomePortfolioPreview"
+import StyleExplorer from "../components/sections/StyleExplorer"
+import ProcessSteps from "../components/sections/ProcessSteps"
+import PriceGuide from "../components/sections/PriceGuide"
+import AftercareTeaser from "../components/sections/AftercareTeaser"
 import ArtistsPreview from "../components/sections/ArtistsPreview"
-import ServicesPreview from "../components/sections/ServicesPreview"
 import FAQPreview from "../components/sections/FAQPreview"
 import ContactCTA from "../components/sections/ContactCTA"
 import StitchedColumn from "../components/layout/StitchedColumn"
@@ -39,9 +41,11 @@ export default function Home() {
       </Helmet>
       <Hero />
       <StitchedColumn>
-        <HomePortfolioPreview />
+        <StyleExplorer />
+        <ProcessSteps />
+        <PriceGuide />
         <ArtistsPreview />
-        <ServicesPreview />
+        <AftercareTeaser />
         <FAQPreview />
       </StitchedColumn>
       <ContactCTA />

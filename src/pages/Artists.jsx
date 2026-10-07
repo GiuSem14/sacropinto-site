@@ -120,7 +120,7 @@ export default function Artists() {
 
           <div className="mt-20 border-t border-gray-800 pt-16 text-center">
             <p className="text-gray-400 text-lg mb-6">Vuoi lavorare con noi?</p>
-            <Button href="/contatti#scrivici" variant="primary">Contattaci</Button>
+            <Button href="/prenota" variant="primary">Richiedi il tuo tatuaggio</Button>
           </div>
           </FadeInSection>
 

@@ -1,61 +1,77 @@
-import Button from "../ui/Button"
+import { Link } from "react-router-dom"
+import { FaWhatsapp } from "react-icons/fa"
 import sfondoBg from "../../assets/Sfondo.JPG"
+import { portfolioData } from "../../data/portfolio"
+import { BOOKING_PATH, CONTACT } from "../../utils/constants"
+
+// Un nastro di lavori che scorre: la lista è duplicata per un giro continuo
+function Reel({ items, reverse = false }) {
+  const loop = [...items, ...items]
+  return (
+    <div className="reel overflow-hidden" aria-hidden="true">
+      <ul className={`reel-track flex gap-3 md:gap-4 w-max ${reverse ? "reel-reverse" : ""}`}>
+        {loop.map((item, index) => (
+          <li key={`${item.id}-${index}`} className="shrink-0">
+            <img
+              src={item.image}
+              alt=""
+              loading={index < 6 ? "eager" : "lazy"}
+              className="h-40 md:h-64 w-auto aspect-[4/5] object-cover"
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 export default function Hero() {
+  const whatsappUrl = `https://wa.me/${CONTACT.whatsapp.replace(/\D/g, "")}`
+  const half = Math.ceil(portfolioData.length / 2)
+
   return (
-    <section className="relative -mt-16 min-h-svh flex items-center justify-center bg-black overflow-hidden">
+    <section className="relative -mt-16 min-h-svh flex flex-col bg-black overflow-hidden">
+      <img src={sfondoBg} alt="" aria-hidden="true" fetchPriority="high" className="hero-bg absolute inset-0 w-full h-full object-cover opacity-50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black" />
 
-      {/* Lastra ossidata: si assesta lentamente all'apertura */}
-      <img
-        src={sfondoBg}
-        alt=""
-        aria-hidden="true"
-        fetchPriority="high"
-        className="hero-bg absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-black/45" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black" />
+      <div className="relative z-10 flex-1 flex items-center">
+        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 grid lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] gap-10 items-end">
+          <div>
+            <h1 className="sr-only">Sacropinto, tatuaggi e piercing a Piazza Armerina</h1>
+            <img
+              src="/logo-sacropinto.png"
+              alt=""
+              aria-hidden="true"
+              className="hero-logo w-full max-w-[520px] h-auto object-contain"
+            />
+            <p className="hero-rise mt-8 font-display text-3xl md:text-5xl leading-[1.08] text-white max-w-[18ch]" style={{ animationDelay: "1.2s" }}>
+              Il tatuaggio che hai in mente, disegnato solo per te.
+            </p>
+          </div>
 
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 pt-28 pb-36 flex flex-col items-center text-center">
-
-        {/* Il logo viene "inciso" da sinistra a destra */}
-        <h1 className="w-full">
-          <img
-            src="/logo-sacropinto.png"
-            alt="Sacropinto, tatuaggi e piercing"
-            className="hero-logo w-full max-w-[760px] h-auto mx-auto object-contain drop-shadow-[0_2px_0_rgba(0,0,0,0.4)]"
-          />
-        </h1>
-
-        <p className="hero-rise mt-10 text-lg md:text-xl text-white/90 max-w-xl leading-relaxed" style={{ animationDelay: "1.5s" }}>
-          Tatuaggi su misura e piercing in via Chiarandà, nel centro di Piazza Armerina. Si parte sempre da una chiacchierata.
-        </p>
-
-        <div className="hero-rise mt-10 flex flex-col sm:flex-row gap-4 justify-center" style={{ animationDelay: "1.75s" }}>
-          <Button href="/contatti#scrivici" variant="primary">
-            Prenota una consulenza
-          </Button>
-          <Button href="/portfolio" variant="outline">
-            Guarda i lavori
-          </Button>
+          <div className="hero-rise flex flex-col gap-5 lg:pb-2" style={{ animationDelay: "1.45s" }}>
+            <p className="text-lg text-gray-300 leading-relaxed max-w-md">
+              Via Chiarandà 24, Piazza Armerina. Racconta l'idea in due minuti: ti ricontattiamo per la consulenza gratuita.
+            </p>
+            <div className="flex flex-col sm:flex-row lg:flex-col 2xl:flex-row gap-3 lg:items-start">
+              <Link to={BOOKING_PATH} className="inline-flex items-center justify-center whitespace-nowrap min-h-12 px-7 bg-white text-black font-semibold hover:bg-verde transition-colors">
+                Richiedi il tuo tatuaggio
+              </Link>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 whitespace-nowrap min-h-12 px-6 border border-white/60 text-white hover:border-white transition-colors">
+                <FaWhatsapp size={18} /> Scrivi su WhatsApp
+              </a>
+            </div>
+          </div>
         </div>
-
-        <a
-          href="https://calendly.com/seminato-giuseppe98/30min"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hero-rise mt-6 text-sm text-gray-300 underline underline-offset-4 decoration-verde hover:text-white transition-colors"
-          style={{ animationDelay: "1.95s" }}
-        >
-          Oppure scegli tu data e ora online
-        </a>
       </div>
 
-      {/* Il filo scende dall'hero e prosegue nella cucitura della pagina */}
-      <div aria-hidden="true" className="absolute bottom-0 inset-x-0">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="thread-cue stitch-line w-[2px] h-24" />
-        </div>
+      {/* Il portfolio scorre sotto, in due direzioni */}
+      <div className="hero-rise relative z-10 flex flex-col gap-3 md:gap-4 pb-10" style={{ animationDelay: "0.6s" }}>
+        <Reel items={portfolioData.slice(0, half)} />
+        <Reel items={portfolioData.slice(half)} reverse />
+        <Link to="/portfolio" className="self-center mt-4 text-gray-300 hover:text-white underline underline-offset-4 decoration-verde">
+          Sfoglia tutti i lavori
+        </Link>
       </div>
     </section>
   )

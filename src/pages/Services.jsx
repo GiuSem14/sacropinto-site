@@ -68,7 +68,7 @@ export default function Services() {
             <p className="text-gray-400 text-lg mb-6">
               Non sai da dove iniziare? Contattaci per una consulenza gratuita.
             </p>
-            <Button href="/contatti#scrivici" variant="primary">Prenota una consulenza</Button>
+            <Button href="/prenota" variant="primary">Richiedi il tuo tatuaggio</Button>
           </div>
           </FadeInSection>
 

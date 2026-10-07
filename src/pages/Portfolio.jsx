@@ -118,7 +118,7 @@ export default function Portfolio() {
 
           <div className="mt-16 text-center">
             <p className="text-gray-400 mb-6">Ti piace quello che vedi? Parliamo del tuo progetto.</p>
-            <Button href="/contatti#scrivici" variant="primary">Prenota una consulenza</Button>
+            <Button href="/prenota" variant="primary">Richiedi il tuo tatuaggio</Button>
           </div>
         </FadeInSection>
 
