@@ -7,12 +7,7 @@ import { buildMeta } from "../utils/seo"
 import Button from "../components/ui/Button"
 import PageHeader from "../components/layout/PageHeader"
 import PortfolioGrid from "../components/portfolio/PortfolioGrid"
-import PortfolioMasonry from "../components/portfolio/PortfolioMasonry"
-import PortfolioHall from "../components/portfolio/PortfolioHall"
-import useVariant from "../hooks/useVariant"
 import { BOOKING_PATH } from "../utils/constants"
-
-const LAYOUTS = { a: PortfolioGrid, b: PortfolioMasonry, c: PortfolioHall }
 
 export default function Portfolio() {
   const meta = buildMeta({
@@ -20,9 +15,6 @@ export default function Portfolio() {
     description: "Scopri i tatuaggi realizzati da Sacropinto a Piazza Armerina. Anime, neo-tradizionale, fine line e dotwork.",
     path: "/portfolio",
   })
-
-  const variant = useVariant("lavori")
-  const Layout = LAYOUTS[variant] ?? PortfolioGrid
 
   const [activeStyle, setActiveStyle] = useState("Tutti")
   const [lightboxIndex, setLightboxIndex] = useState(-1)
@@ -56,7 +48,7 @@ export default function Portfolio() {
       />
 
       <section className="bg-black pt-12 pb-24">
-        <Layout
+        <PortfolioGrid
           items={filtered}
           activeStyle={activeStyle}
           onStyleChange={setActiveStyle}

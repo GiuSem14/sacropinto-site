@@ -4,7 +4,6 @@ import Reveal from "../ui/Reveal"
 import { guestDates, bookDateUrl, instagramUrl } from "./guestLinks"
 
 /*
-  Variante C — Locandine.
   Ogni guest è una locandina a tutta altezza, come quelle appese in studio:
   foto, nome enorme, e le date come biglietti con il bordo tratteggiato da staccare.
   Si scorrono di lato.

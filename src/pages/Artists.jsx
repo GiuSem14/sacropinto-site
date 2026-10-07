@@ -2,13 +2,8 @@ import { Helmet } from "react-helmet-async"
 import { buildMeta } from "../utils/seo"
 import Button from "../components/ui/Button"
 import PageHeader from "../components/layout/PageHeader"
-import ArtistsCards from "../components/artists/ArtistsCards"
 import ArtistsEditorial from "../components/artists/ArtistsEditorial"
-import ArtistsDuo from "../components/artists/ArtistsDuo"
-import useVariant from "../hooks/useVariant"
 import { BOOKING_PATH } from "../utils/constants"
-
-const LAYOUTS = { a: ArtistsCards, b: ArtistsEditorial, c: ArtistsDuo }
 
 export default function Artists() {
   const meta = buildMeta({
@@ -16,9 +11,6 @@ export default function Artists() {
     description: "Conosci gli artisti di Sacropinto tattoo studio a Piazza Armerina. Stili, esperienza e filosofia di ogni tatuatore.",
     path: "/artisti",
   })
-
-  const variant = useVariant("artisti")
-  const Layout = LAYOUTS[variant] ?? ArtistsCards
 
   return (
     <>
@@ -45,7 +37,7 @@ export default function Artists() {
       />
 
       <section className="bg-black pt-12 pb-24">
-        <Layout />
+        <ArtistsEditorial />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 pt-12 border-t border-gray-800 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <p className="font-display text-3xl md:text-4xl text-white max-w-[24ch]">Non sai a chi rivolgerti? Ti consigliamo noi.</p>

@@ -1,7 +1,7 @@
 import Reveal from "../ui/Reveal"
 import StyleFilter from "./StyleFilter"
 
-/* Variante A — Griglia uniforme, didascalia al passaggio */
+/* Griglia uniforme, didascalia al passaggio */
 export default function PortfolioGrid({ items, activeStyle, onStyleChange, onOpen }) {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

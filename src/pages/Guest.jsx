@@ -5,13 +5,8 @@ import { buildMeta } from "../utils/seo"
 import { fetchGuests } from "../data/guestUtils"
 import { CONTACT } from "../utils/constants"
 import PageHeader from "../components/layout/PageHeader"
-import GuestCards from "../components/guest/GuestCards"
-import GuestCalendar from "../components/guest/GuestCalendar"
 import GuestPosters from "../components/guest/GuestPosters"
 import { applyAsGuestUrl } from "../components/guest/guestLinks"
-import useVariant from "../hooks/useVariant"
-
-const LAYOUTS = { a: GuestCards, b: GuestCalendar, c: GuestPosters }
 
 function Loading() {
   return (
@@ -49,9 +44,6 @@ export default function Guest() {
       .finally(() => setLoading(false))
   }, [])
 
-  const variant = useVariant("guest")
-  const Layout = LAYOUTS[variant] ?? GuestCards
-
   const meta = buildMeta({
     title: "Artisti Guest",
     description: "Gli artisti ospiti di Sacropinto tattoo studio a Piazza Armerina. Stili e date delle sessioni guest.",
@@ -87,7 +79,7 @@ export default function Guest() {
           {loading && <Loading />}
           {!loading && error && <Empty message={error} />}
           {!loading && !error && guests.length === 0 && <Empty message="Nessun guest in programma, per ora." />}
-          {!loading && !error && guests.length > 0 && <Layout guests={guests} />}
+          {!loading && !error && guests.length > 0 && <GuestPosters guests={guests} />}
 
           <div className="mt-20 pt-12 border-t border-gray-800 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>

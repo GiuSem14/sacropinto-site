@@ -5,7 +5,6 @@ import { artistsData } from "../../data/artists"
 import { bookingUrl, whatsappUrl, firstName } from "./artistLinks"
 
 /*
-  Variante B — Ritratto editoriale.
   Ogni artista ha una "pagina di rivista": il ritratto resta fermo mentre a fianco scorrono
   il nome inciso a tutta larghezza, la bio in grande e gli stili. I lati si alternano.
 */

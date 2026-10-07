@@ -20,7 +20,6 @@ import Guest from "./pages/Guest"
 import Booking from "./pages/Booking"
 import Aftercare from "./pages/Aftercare"
 import MobileBookingBar from "./components/ui/MobileBookingBar"
-import VariantSwitcher from "./components/ui/VariantSwitcher"
 
 function ScrollToTop() {
   useScrollToTop()
@@ -56,7 +55,6 @@ export default function App() {
           </div>
           <FloatingWhatsApp />
           <MobileBookingBar />
-          <VariantSwitcher />
           <CookieBanner />
         </CookieConsentProvider>
       </BrowserRouter>

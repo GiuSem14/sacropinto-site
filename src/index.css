@@ -126,27 +126,7 @@ body {
 .thread-cue { animation: thread-run 2.4s ease-in-out 2.2s infinite both; }
 .step-in { animation: rise 0.6s var(--ease-out-soft) both; }
 
-/* Nastro di lavori nell'hero: scorre continuo, si ferma al passaggio */
-@keyframes reel {
-  to { transform: translateX(-50%); }
-}
-.reel-track { animation: reel 60s linear infinite; }
-.reel-reverse { animation-direction: reverse; animation-duration: 70s; }
-.reel:hover .reel-track { animation-play-state: paused; }
-
-/* Hero B: lento zoom sul lavoro attivo e barra del tempo */
-@keyframes slide-zoom {
-  from { transform: scale(1.08); }
-  to { transform: scale(1); }
-}
-.slide-zoom { animation: slide-zoom 6s ease-out both; }
-@keyframes slide-progress {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-.slide-progress { animation: slide-progress linear both; }
-
-/* Hero D: parete di lavori in colonne che scorrono */
+/* Hero: parete di lavori in colonne che scorrono */
 @keyframes wall-up {
   to { transform: translateY(-50%); }
 }
@@ -195,13 +175,10 @@ body {
   .thread-cue,
   .step-in,
   .swap-in,
-  .slide-zoom,
   .wall-col,
   .wall-tile {
     animation: none;
   }
-  .reel { overflow-x: auto; }
-  .reel-track { animation: none; }
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
   }
