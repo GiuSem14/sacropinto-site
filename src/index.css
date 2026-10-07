@@ -1,23 +1,33 @@
 @import "tailwindcss";
 
-/* Tailwind v4 theme: register custom font families as utilities */
+/*
+  Tailwind v4 theme — palette "ossido" presa dalla lastra di ferro ossidato del brand
+  (Sfondo.JPG / Brand.jpg). Le classi bg-black, text-white, text-gray-* restano valide
+  in tutti i componenti: cambiano solo i valori.
+*/
 @theme {
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-sans: "Archivo", system-ui, -apple-system, sans-serif;
+  --font-display: "Libre Caslon Display", Georgia, serif;
 
-  --color-black: #1a1210;
-  --color-white: #f5f0e8;
+  --color-black: #1f1814;
+  --color-white: #ece4d6;
   --color-gray-50: #f0ebe3;
   --color-gray-100: #e5ddd3;
   --color-gray-200: #d4cabb;
-  --color-gray-300: #b8a999;
-  --color-gray-400: #a39585;
-  --color-gray-500: #8a7a6a;
+  --color-gray-300: #c4b9a8;
+  --color-gray-400: #b0a493;
+  --color-gray-500: #8f8170;
   --color-gray-600: #6b5a4a;
   --color-gray-700: #4a3a2e;
-  --color-gray-800: #3a2a1e;
-  --color-gray-900: #241a14;
-  --color-gray-950: #1a1210;
+  --color-gray-800: #3a2e26;
+  --color-gray-900: #2b221c;
+  --color-gray-950: #1f1814;
+
+  /* Verde rame: le venature ossidate della lastra. Unico colore d'accento. */
+  --color-verde: #8db3a2;
+  --color-verde-scuro: #6e8f80;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
@@ -25,8 +35,110 @@ html {
 }
 
 body {
-  background-color: #1a1210;
-  color: #f5f0e8;
+  background-color: var(--color-black);
+  color: var(--color-white);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-verde);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-verde);
+  color: var(--color-black);
+}
+
+/* ------------------------------------------------------------------
+   Reveal allo scroll — gestito da <Reveal> (src/components/ui/Reveal.jsx).
+   data-reveal="up"   → sale e appare
+   data-reveal="clip" → l'immagine si scopre dal basso, come una tela
+   ------------------------------------------------------------------ */
+[data-reveal] {
+  transition:
+    opacity 900ms var(--ease-out-soft),
+    transform 900ms var(--ease-out-soft),
+    clip-path 1200ms var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal="up"] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+[data-reveal="clip"] {
+  clip-path: inset(100% 0 0 0);
+}
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+}
+
+/* ------------------------------------------------------------------
+   Hero: un'unica sequenza d'ingresso orchestrata
+   ------------------------------------------------------------------ */
+@keyframes hero-settle {
+  from { transform: scale(1.14); }
+  to { transform: scale(1); }
+}
+
+@keyframes engrave {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes thread-run {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.hero-bg { animation: hero-settle 2.6s var(--ease-out-soft) both; }
+.hero-logo { animation: engrave 1.6s var(--ease-out-soft) 0.35s both; }
+.hero-rise { animation: rise 0.9s var(--ease-out-soft) both; }
+.thread-cue { animation: thread-run 2.4s ease-in-out 2.2s infinite both; }
+
+/* Linea tratteggiata "cucitura": stessa grafica del filo nel logo */
+.stitch-line {
+  background-image: linear-gradient(to bottom, var(--color-verde-scuro) 60%, transparent 0);
+  background-size: 2px 14px;
+  background-repeat: repeat-y;
+}
+
+.stitch-line-h {
+  background-image: linear-gradient(to right, var(--color-gray-700) 60%, transparent 0);
+  background-size: 12px 1px;
+  background-repeat: repeat-x;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal],
+  [data-reveal="up"],
+  [data-reveal="clip"] {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+  .hero-bg,
+  .hero-logo,
+  .hero-rise,
+  .thread-cue {
+    animation: none;
+  }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
 }
