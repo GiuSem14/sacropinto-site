@@ -14,12 +14,12 @@ export default function useScrollProgress(anchor = 0.7) {
     if (!el) return
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    let frame = 0
     if (reduced) {
-      setProgress(1)
-      return
+      frame = requestAnimationFrame(() => setProgress(1))
+      return () => cancelAnimationFrame(frame)
     }
 
-    let frame = 0
     const update = () => {
       frame = 0
       const rect = el.getBoundingClientRect()
@@ -31,7 +31,7 @@ export default function useScrollProgress(anchor = 0.7) {
       if (!frame) frame = requestAnimationFrame(update)
     }
 
-    update()
+    frame = requestAnimationFrame(update)
     window.addEventListener("scroll", onScroll, { passive: true })
     window.addEventListener("resize", onScroll)
     return () => {

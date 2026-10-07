@@ -5,8 +5,9 @@ import { useEffect, useRef } from "react"
  * variant "up": sale e appare. variant "clip": si scopre dal basso (per le immagini).
  * delay in ms, per scaglionare elementi vicini.
  */
-export default function Reveal({ as: Tag = "div", variant = "up", delay = 0, className = "", style, children, ...rest }) {
+export default function Reveal({ as = "div", variant = "up", delay = 0, className = "", style, children, ...rest }) {
   const ref = useRef(null)
+  const Tag = as
 
   useEffect(() => {
     const el = ref.current
