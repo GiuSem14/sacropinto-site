@@ -3,6 +3,7 @@ import { HelmetProvider } from "react-helmet-async"
 import { CookieConsentProvider } from "./context/CookieConsentContext"
 import CookieBanner from "./components/cookie/CookieBanner"
 import FloatingWhatsApp from "./components/ui/FloatingWhatsApp"
+import VariantsButton from "./components/ui/VariantsButton"
 import Analytics from "./components/analytics/Analytics"
 import Navbar from "./components/layout/Navbar"
 import Footer from "./components/layout/Footer"
@@ -49,6 +50,7 @@ export default function App() {
             <Footer />
           </div>
           <FloatingWhatsApp />
+          <VariantsButton />
           <CookieBanner />
         </CookieConsentProvider>
       </BrowserRouter>
